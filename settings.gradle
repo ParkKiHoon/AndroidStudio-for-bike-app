@@ -1,0 +1,4 @@
+include ':unityLibrary-release'
+include ':app'
+rootProject.name = "bike2"
+include ':app', ':unityLibrary-release'
