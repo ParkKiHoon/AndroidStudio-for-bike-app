@@ -127,4 +127,42 @@ public class MainActivity extends AppCompatActivity {
 
     public interface OnBackPressedListener {
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 8090 && resultCode == 8090) {
+            String[] name=data.getExtras().getStringArray("name");
+            String[] part=data.getExtras().getStringArray("part");
+            Map<String, Object> temp = new HashMap<>();
+            temp.put("title",data.getExtras().getString("get_custom"));
+            temp.put("weight_price",data.getExtras().getString("price"));
+            temp.put("image","아직 안넣음");
+            temp.put("frame_name",name[0]);
+            temp.put("wheelset_name",name[1]);
+            temp.put("handlebar_name",name[2]);
+            temp.put("saddle_name",name[3]);
+            temp.put("groupset_name",name[4]);
+            temp.put("frame_value",part[0]);
+            temp.put("wheelset_value",part[1]);
+            temp.put("handlebar_value",part[2]);
+            temp.put("saddle_value",part[3]);
+            temp.put("groupset_value",part[4]);
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference docRef = db.collection("users").document(user.getUid());
+            docRef.collection("myCustom").add(temp)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d("TAG", "DocumentSnapshot successfully written!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("TAG", "Error writing document", e);
+                        }
+                    });
+        }
+    }
 }

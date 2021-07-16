@@ -186,6 +186,7 @@ public class HomeFragment extends Fragment {
             }
             Map<String, Object> temp=new HashMap<>();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
+            temp.put("title",data.getExtras().getString("get_custom"));
             temp.put("image","아직 안넣음");
             temp.put("time",System.currentTimeMillis());
             temp.put("weight_price",Float.toString(weight)+"kg  -  "+Float.toString(price)+"₩");
