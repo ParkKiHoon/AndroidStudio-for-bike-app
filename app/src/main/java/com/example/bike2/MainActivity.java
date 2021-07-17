@@ -2,13 +2,24 @@ package com.example.bike2;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -17,11 +28,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -42,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     private ListFragment listFragment;
     private ChatFragment chatFragment;
     private HomeFragment homeFragment;
+    private DrawerLayout mDrawerLayout;
+    private Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,24 +87,44 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar()!=null){
+            Drawable drawable= getResources().getDrawable(R.drawable.settings);
+            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+            Drawable newdrawable = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 30, 30, true));
+            newdrawable.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(newdrawable);
 
+        }
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-
-
-        bottomNavigationView=findViewById(R.id.bottom_navy);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.bringToFront();
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.menu_home:
-                        setFragment(0);break;
-                    case R.id.menu_list:
-                        setFragment(1);break;
-                    case R.id.menu_map:
-                        setFragment(2);break;
-                    case R.id.menu_chat:
-                        setFragment(3);break;
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                mDrawerLayout.closeDrawers();
+
+                int id = menuItem.getItemId();
+                String title = menuItem.getTitle().toString();
+
+                if(id == R.id.account){
+                    Toast.makeText(context, title + ": 계정 정보를 확인합니다.", Toast.LENGTH_SHORT).show();
                 }
+                else if(id == R.id.setting){
+                    Toast.makeText(context, title + ": 설정 정보를 확인합니다.", Toast.LENGTH_SHORT).show();
+                }
+                else if(id == R.id.logout){
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(context, title + ": 로그아웃 시도중", Toast.LENGTH_SHORT).show();
+                }
+
                 return true;
             }
         });
@@ -97,32 +132,75 @@ public class MainActivity extends AppCompatActivity {
         listFragment=new ListFragment();
         mapFragment=new MapFragment();
         chatFragment=new ChatFragment();
+        bottomNavigationView=findViewById(R.id.bottom_navy);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.menu_home:
+                        setFragment("home",homeFragment);break;
+                    case R.id.menu_list:
+                        setFragment("list",listFragment);break;
+                    case R.id.menu_map:
+                        setFragment("map",mapFragment);break;
+                    case R.id.menu_chat:
+                        setFragment("char",chatFragment);break;
+                }
+                return true;
+            }
+        });
 
-        setFragment(0);
+        setFragment("home",homeFragment);
     }
 
 
-    private void setFragment(int n){
+
+    private void setFragment(String tag, Fragment fragment){
         fragmentManager=getSupportFragmentManager();
         fragmentTransaction=fragmentManager.beginTransaction();
-        switch (n){
-            case 0:
-                fragmentTransaction.replace(R.id.main_frame,homeFragment);
-                fragmentTransaction.commit();
-                break;
-            case 1:
-                fragmentTransaction.replace(R.id.main_frame,listFragment);
-                fragmentTransaction.commit();
-                break;
-            case 2:
-                fragmentTransaction.replace(R.id.main_frame,mapFragment);
-                fragmentTransaction.commit();
-                break;
-            case 3:
-                fragmentTransaction.replace(R.id.main_frame,chatFragment);
-                fragmentTransaction.commit();
-                break;
+        if(fragmentManager.findFragmentByTag(tag)==null){
+            fragmentTransaction.add(R.id.main_frame,fragment,tag);
         }
+
+        Fragment home=fragmentManager.findFragmentByTag("home");
+        Fragment list=fragmentManager.findFragmentByTag("list");
+        Fragment map=fragmentManager.findFragmentByTag("map");
+        Fragment chat=fragmentManager.findFragmentByTag("chat");
+
+        if(home!=null){
+            fragmentTransaction.hide(home);
+        }
+        if(list!=null){
+            fragmentTransaction.hide(list);
+        }
+        if(map!=null){
+            fragmentTransaction.hide(map);
+        }
+        if(chat!=null){
+            fragmentTransaction.hide(chat);
+        }
+
+        if(tag=="home"){
+            if(home!=null){
+                fragmentTransaction.show(home);
+            }
+        }
+        if(tag=="list"){
+            if(list!=null){
+                fragmentTransaction.show(list);
+            }
+        }
+        if(tag=="map"){
+            if(map!=null){
+                fragmentTransaction.show(map);
+            }
+        }
+        if(tag=="chat"){
+            if(chat!=null){
+                fragmentTransaction.show(chat);
+            }
+        }
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     public interface OnBackPressedListener {
@@ -165,4 +243,16 @@ public class MainActivity extends AppCompatActivity {
                     });
         }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ // 왼쪽 상단 버튼 눌렀을 때
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

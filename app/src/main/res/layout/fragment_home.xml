@@ -2,15 +2,20 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#DEDEDE">
 
     <Button
         android:id="@+id/button"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="272dp"
-        android:text="조립"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:background="@drawable/round"
+        android:text="견적내기"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:backgroundTint="#7C4DFF"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -18,16 +23,389 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.542" />
 
-
-    <Button
-        android:id="@+id/btn_logout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="로그아웃"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button">
+
+
+        <View
+            android:id="@+id/view_home_1"
+            android:layout_width="315dp"
+            android:layout_height="80dp"
+            android:background="@drawable/round_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_home_1"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="부품이 선택되지 않았습니다."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/view_home_1"
+            app:layout_constraintStart_toEndOf="@+id/iv_home_1"
+            app:layout_constraintTop_toTopOf="@+id/view_home_1"
+            app:layout_constraintVertical_bias="0.392" />
+
+        <ImageView
+            android:id="@+id/iv_home_1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_home_1"
+            app:layout_constraintStart_toStartOf="@+id/view_home_1"
+            app:layout_constraintTop_toTopOf="@+id/view_home_1"
+            app:layout_constraintVertical_bias="0.55" />
+
+        <View
+            android:id="@+id/view_home_2"
+            android:layout_width="80dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="70dp"
+            android:background="@drawable/round_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/view_home_1"
+            app:layout_constraintEnd_toEndOf="@+id/view_home_1"
+            app:layout_constraintHorizontal_bias="0.068"
+            app:layout_constraintStart_toStartOf="@+id/view_home_1" />
+
+        <TextView
+            android:id="@+id/tv_home_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="프레임"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/view_home_2"
+            app:layout_constraintEnd_toEndOf="@+id/view_home_2"
+            app:layout_constraintStart_toStartOf="@+id/view_home_2"
+            app:layout_constraintTop_toTopOf="@+id/view_home_2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button">
+
+
+        <View
+            android:id="@+id/view_home_3"
+            android:layout_width="315dp"
+            android:layout_height="80dp"
+            android:background="@drawable/round_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_home_3"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="부품이 선택되지 않았습니다."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/view_home_3"
+            app:layout_constraintStart_toEndOf="@+id/iv_home_2"
+            app:layout_constraintTop_toTopOf="@+id/view_home_3"
+            app:layout_constraintVertical_bias="0.392" />
+
+        <ImageView
+            android:id="@+id/iv_home_2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_home_3"
+            app:layout_constraintStart_toStartOf="@+id/view_home_3"
+            app:layout_constraintTop_toTopOf="@+id/view_home_3"
+            app:layout_constraintVertical_bias="0.55" />
+
+        <View
+            android:id="@+id/view_home_4"
+            android:layout_width="60dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="70dp"
+            android:background="@drawable/round_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/view_home_3"
+            app:layout_constraintEnd_toEndOf="@+id/view_home_3"
+            app:layout_constraintHorizontal_bias="0.068"
+            app:layout_constraintStart_toStartOf="@+id/view_home_3" />
+
+        <TextView
+            android:id="@+id/tv_home_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="휠셋"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/view_home_4"
+            app:layout_constraintEnd_toEndOf="@+id/view_home_4"
+            app:layout_constraintStart_toStartOf="@+id/view_home_4"
+            app:layout_constraintTop_toTopOf="@+id/view_home_4" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="251dp"
+        android:layout_marginEnd="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button">
+
+
+        <View
+            android:id="@+id/view_home_5"
+            android:layout_width="315dp"
+            android:layout_height="80dp"
+            android:background="@drawable/round_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_home_5"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="부품이 선택되지 않았습니다."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/view_home_5"
+            app:layout_constraintStart_toEndOf="@+id/iv_home_3"
+            app:layout_constraintTop_toTopOf="@+id/view_home_5"
+            app:layout_constraintVertical_bias="0.392" />
+
+        <ImageView
+            android:id="@+id/iv_home_3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_home_5"
+            app:layout_constraintStart_toStartOf="@+id/view_home_5"
+            app:layout_constraintTop_toTopOf="@+id/view_home_5"
+            app:layout_constraintVertical_bias="0.55" />
+
+        <View
+            android:id="@+id/view_home_6"
+            android:layout_width="80dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="70dp"
+            android:background="@drawable/round_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/view_home_5"
+            app:layout_constraintEnd_toEndOf="@+id/view_home_5"
+            app:layout_constraintHorizontal_bias="0.068"
+            app:layout_constraintStart_toStartOf="@+id/view_home_5" />
+
+        <TextView
+            android:id="@+id/tv_home_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="프레임"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/view_home_6"
+            app:layout_constraintEnd_toEndOf="@+id/view_home_6"
+            app:layout_constraintStart_toStartOf="@+id/view_home_6"
+            app:layout_constraintTop_toTopOf="@+id/view_home_6" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="354dp"
+        android:layout_marginEnd="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button">
+
+
+        <View
+            android:id="@+id/view_home_7"
+            android:layout_width="315dp"
+            android:layout_height="80dp"
+            android:background="@drawable/round_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_home_7"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="부품이 선택되지 않았습니다."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/view_home_7"
+            app:layout_constraintStart_toEndOf="@+id/iv_home_4"
+            app:layout_constraintTop_toTopOf="@+id/view_home_7"
+            app:layout_constraintVertical_bias="0.392" />
+
+        <ImageView
+            android:id="@+id/iv_home_4"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_home_7"
+            app:layout_constraintStart_toStartOf="@+id/view_home_7"
+            app:layout_constraintTop_toTopOf="@+id/view_home_7"
+            app:layout_constraintVertical_bias="0.55" />
+
+        <View
+            android:id="@+id/view_home_8"
+            android:layout_width="60dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="70dp"
+            android:background="@drawable/round_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/view_home_7"
+            app:layout_constraintEnd_toEndOf="@+id/view_home_7"
+            app:layout_constraintHorizontal_bias="0.068"
+            app:layout_constraintStart_toStartOf="@+id/view_home_7" />
+
+        <TextView
+            android:id="@+id/tv_home_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="안장"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/view_home_8"
+            app:layout_constraintEnd_toEndOf="@+id/view_home_8"
+            app:layout_constraintStart_toStartOf="@+id/view_home_8"
+            app:layout_constraintTop_toTopOf="@+id/view_home_8" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="457dp"
+        android:layout_marginEnd="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button">
+
+
+        <View
+            android:id="@+id/view_home_9"
+            android:layout_width="315dp"
+            android:layout_height="80dp"
+            android:background="@drawable/round_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_home_9"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="부품이 선택되지 않았습니다."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/view_home_9"
+            app:layout_constraintStart_toEndOf="@+id/iv_home_5"
+            app:layout_constraintTop_toTopOf="@+id/view_home_9"
+            app:layout_constraintVertical_bias="0.392" />
+
+        <ImageView
+            android:id="@+id/iv_home_5"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_home_9"
+            app:layout_constraintStart_toStartOf="@+id/view_home_9"
+            app:layout_constraintTop_toTopOf="@+id/view_home_9"
+            app:layout_constraintVertical_bias="0.55" />
+
+        <View
+            android:id="@+id/view_home_10"
+            android:layout_width="80dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="70dp"
+            android:background="@drawable/round_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/view_home_9"
+            app:layout_constraintEnd_toEndOf="@+id/view_home_9"
+            app:layout_constraintHorizontal_bias="0.068"
+            app:layout_constraintStart_toStartOf="@+id/view_home_9" />
+
+        <TextView
+            android:id="@+id/tv_home_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="구동계"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/view_home_10"
+            app:layout_constraintEnd_toEndOf="@+id/view_home_10"
+            app:layout_constraintStart_toStartOf="@+id/view_home_10"
+            app:layout_constraintTop_toTopOf="@+id/view_home_10" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_home1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="59dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/round"
+        android:text="공유"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:backgroundTint="#7C4DFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_home2"
+        app:layout_constraintStart_toEndOf="@+id/btn_home"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/round"
+        android:text="저장"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:backgroundTint="#7C4DFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_home1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_home2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/round"
+        android:text="견적신청"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:backgroundTint="#7C4DFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.99"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.002" />
+        app:layout_constraintStart_toEndOf="@+id/btn_home1"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
