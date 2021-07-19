@@ -100,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -113,16 +112,17 @@ public class MainActivity extends AppCompatActivity {
                 String title = menuItem.getTitle().toString();
 
                 if(id == R.id.account){
-                    Toast.makeText(context, title + ": 계정 정보를 확인합니다.", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(getApplicationContext(),MyCustomActivity.class);
+                    startActivity(intent);
                 }
                 else if(id == R.id.setting){
-                    Toast.makeText(context, title + ": 설정 정보를 확인합니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, title + ": 뭐넣을지 생각중.", Toast.LENGTH_SHORT).show();
                 }
                 else if(id == R.id.logout){
                     FirebaseAuth.getInstance().signOut();
                     Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
                     startActivity(intent);
-                    Toast.makeText(context, title + ": 로그아웃 시도중", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, title + ": 로그아웃 완료", Toast.LENGTH_SHORT).show();
                 }
 
                 return true;
@@ -138,69 +138,48 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.menu_home:
-                        setFragment("home",homeFragment);break;
+                        setFragment(0);break;
                     case R.id.menu_list:
-                        setFragment("list",listFragment);break;
+                        setFragment(1);break;
                     case R.id.menu_map:
-                        setFragment("map",mapFragment);break;
+                        setFragment(2);break;
                     case R.id.menu_chat:
-                        setFragment("char",chatFragment);break;
+                        setFragment(3);break;
                 }
                 return true;
             }
         });
 
-        setFragment("home",homeFragment);
+        homeFragment=new HomeFragment();
+        listFragment=new ListFragment();
+        mapFragment=new MapFragment();
+        chatFragment=new ChatFragment();
+        setFragment(0);
     }
 
 
 
-    private void setFragment(String tag, Fragment fragment){
+    private void setFragment(int n){
         fragmentManager=getSupportFragmentManager();
         fragmentTransaction=fragmentManager.beginTransaction();
-        if(fragmentManager.findFragmentByTag(tag)==null){
-            fragmentTransaction.add(R.id.main_frame,fragment,tag);
+        switch (n){
+            case 0:
+                fragmentTransaction.replace(R.id.main_frame,homeFragment);
+                fragmentTransaction.commit();
+                break;
+            case 1:
+                fragmentTransaction.replace(R.id.main_frame,listFragment);
+                fragmentTransaction.commit();
+                break;
+            case 2:
+                fragmentTransaction.replace(R.id.main_frame,mapFragment);
+                fragmentTransaction.commit();
+                break;
+            case 3:
+                fragmentTransaction.replace(R.id.main_frame,chatFragment);
+                fragmentTransaction.commit();
+                break;
         }
-
-        Fragment home=fragmentManager.findFragmentByTag("home");
-        Fragment list=fragmentManager.findFragmentByTag("list");
-        Fragment map=fragmentManager.findFragmentByTag("map");
-        Fragment chat=fragmentManager.findFragmentByTag("chat");
-
-        if(home!=null){
-            fragmentTransaction.hide(home);
-        }
-        if(list!=null){
-            fragmentTransaction.hide(list);
-        }
-        if(map!=null){
-            fragmentTransaction.hide(map);
-        }
-        if(chat!=null){
-            fragmentTransaction.hide(chat);
-        }
-
-        if(tag=="home"){
-            if(home!=null){
-                fragmentTransaction.show(home);
-            }
-        }
-        if(tag=="list"){
-            if(list!=null){
-                fragmentTransaction.show(list);
-            }
-        }
-        if(tag=="map"){
-            if(map!=null){
-                fragmentTransaction.show(map);
-            }
-        }
-        if(tag=="chat"){
-            if(chat!=null){
-                fragmentTransaction.show(chat);
-            }
-        }
-        fragmentTransaction.commitAllowingStateLoss();
     }
 
     public interface OnBackPressedListener {

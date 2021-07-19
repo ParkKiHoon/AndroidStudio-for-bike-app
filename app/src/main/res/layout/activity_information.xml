@@ -6,6 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".InformationActivity">
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="450dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="일반 이용자" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="점포 운영자 (구현안해둠 클릭ㄴㄴ)" />
+    </RadioGroup>
+
     <EditText
         android:id="@+id/et_in_information"
         android:layout_width="300dp"
@@ -45,6 +66,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="점포 운영자일 경우 점포명을 입력해주세요"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_in_information"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:layout_constraintVertical_bias="0.784" />
 
     <TextView
         android:id="@+id/textView7"

@@ -1,28 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
+    android:id="@+id/map_frame"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnmap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="현재위치"
-        app:layout_constraintBottom_toBottomOf="@+id/map"
-        app:layout_constraintEnd_toEndOf="@+id/map"
-        app:layout_constraintStart_toStartOf="@+id/map" />
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.MapFragment"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="-92dp" />
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btnmap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="40dp"
+            android:text="현재위치"
+            app:layout_constraintEnd_toEndOf="@+id/map"
+            app:layout_constraintTop_toTopOf="@+id/map" />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="-34dp"
+            tools:layout_editor_absoluteY="44dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/page"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#9EE3E3"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="631dp">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/page2"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#9EE3E3"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="-40dp"
+        tools:layout_editor_absoluteY="365dp">
+
+        <ImageView
+            android:id="@+id/map_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="5dp"
+            android:paddingBottom="5dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/map_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingRight="30dp" />
+
+    </LinearLayout>
+
+</FrameLayout>

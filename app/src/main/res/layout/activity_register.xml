@@ -106,25 +106,4 @@
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <RadioButton
-        android:id="@+id/radioButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="13dp"
-        android:text="일반 이용자"
-        app:layout_constraintBottom_toTopOf="@+id/radioButton2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_pw2_in_reg" />
-
-    <RadioButton
-        android:id="@+id/radioButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:text="점포 운영자"
-        app:layout_constraintBottom_toTopOf="@+id/btn_register_in_reg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

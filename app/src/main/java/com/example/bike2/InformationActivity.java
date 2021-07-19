@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,7 @@ public class InformationActivity extends AppCompatActivity {
 
     private EditText et_in_information;
     private Button btn_in_information;
+    private RadioButton radioButton,radioButton2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +33,23 @@ public class InformationActivity extends AppCompatActivity {
 
         et_in_information=findViewById(R.id.et_in_information);
         btn_in_information=findViewById(R.id.btn_in_information);
+        radioButton = findViewById(R.id.radioButton);
+        radioButton2 = findViewById(R.id.radioButton2);
 
         btn_in_information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!radioButton.isChecked()&&!radioButton2.isChecked()) {
+                    Toast.makeText(getApplicationContext(), "이용방식을 선택해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 Map<String, Object> temp = new HashMap<>();
+                if(radioButton.isChecked())
+                    temp.put("isShop","false");
+                else
+                    temp.put("isShop","true");
                 temp.put("nickname",et_in_information.getText().toString());
 
                 db.collection("users").document(user.getUid()).set(temp)

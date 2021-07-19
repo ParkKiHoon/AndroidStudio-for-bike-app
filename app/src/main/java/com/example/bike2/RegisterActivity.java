@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
         btn_register_in_reg = findViewById(R.id.btn_register_in_reg);
         tv_login_in_reg = findViewById(R.id.tv_login_in_reg);
 
+
         tv_login_in_reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,8 +47,17 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         btn_register_in_reg.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                if(!et_id_in_reg.getText().toString().contains(".")){
+                    Toast.makeText(getApplicationContext(), "올바르지 않은 이메일 형식입니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(et_pw2_in_reg.getText().toString().length()<6) {
+                    Toast.makeText(getApplicationContext(), "비밀번호는 최소 6자 이상 사용하세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 signUp();
             }
         });
