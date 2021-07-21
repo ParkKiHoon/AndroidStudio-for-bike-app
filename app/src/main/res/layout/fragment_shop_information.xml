@@ -1,0 +1,92 @@
+<FrameLayout
+    android:id="@+id/map_frame"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/info_cur_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="40dp"
+            android:text="현재위치"
+            app:layout_constraintEnd_toEndOf="@+id/map"
+            app:layout_constraintTop_toTopOf="@+id/map" />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/info_map"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="-34dp"
+            tools:layout_editor_absoluteY="44dp" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <LinearLayout
+        android:id="@+id/page2"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#9EE3E3"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="-40dp"
+        tools:layout_editor_absoluteY="365dp">
+
+        <ImageView
+            android:id="@+id/info_second_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="5dp"
+            android:paddingBottom="5dp"
+            android:src="@drawable/plus" />
+
+        <EditText
+            android:textSize="22sp"
+            android:hint="지도에서 표시될 내용을 입력해 주세요"
+            android:id="@+id/info_second_content"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingRight="30dp" />
+
+        <Button
+            android:id="@+id/info_second_btn"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:background="#EDBC00"
+            android:text="완료"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#EDBC00"
+        android:gravity="center"
+        android:text="가게 등록
+"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</FrameLayout>

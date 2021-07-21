@@ -1,5 +1,6 @@
 package com.example.bike2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,10 +36,13 @@ public class InformationActivity extends AppCompatActivity {
         btn_in_information=findViewById(R.id.btn_in_information);
         radioButton = findViewById(R.id.radioButton);
         radioButton2 = findViewById(R.id.radioButton2);
-
         btn_in_information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(et_in_information.getText().toString()==null){
+                    Toast.makeText(getApplicationContext(), "닉네임을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(!radioButton.isChecked()&&!radioButton2.isChecked()) {
                     Toast.makeText(getApplicationContext(), "이용방식을 선택해주세요.", Toast.LENGTH_SHORT).show();
                     return;
@@ -46,27 +50,30 @@ public class InformationActivity extends AppCompatActivity {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 Map<String, Object> temp = new HashMap<>();
-                if(radioButton.isChecked())
-                    temp.put("isShop","false");
-                else
-                    temp.put("isShop","true");
-                temp.put("nickname",et_in_information.getText().toString());
-
-                db.collection("users").document(user.getUid()).set(temp)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d("TAG", "DocumentSnapshot successfully written!");
-                                finish();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w("TAG", "Error writing document", e);
-                            }
-                        });
-
+                if(radioButton.isChecked()) {
+                    temp.put("nickname",et_in_information.getText().toString());
+                    temp.put("isShop", "false");
+                    db.collection("users").document(user.getUid()).set(temp)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("TAG", "DocumentSnapshot successfully written!");
+                                    finish();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("TAG", "Error writing document", e);
+                                }
+                            });
+                }
+                else {
+                    Intent intent=new Intent(getApplicationContext(),ShopInformationActivity.class);
+                    intent.putExtra("nickname",et_in_information.getText().toString());
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
