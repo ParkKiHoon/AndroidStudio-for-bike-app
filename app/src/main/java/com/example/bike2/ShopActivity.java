@@ -51,7 +51,7 @@ public class ShopActivity extends AppCompatActivity {
         uid_me=user.getUid();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("shops").document(uid);
+        DocumentReference docRef = db.collection("users").document(uid);
         docRef.collection("myShop").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {

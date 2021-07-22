@@ -45,7 +45,7 @@
         tools:layout_editor_absoluteY="365dp">
 
         <ImageView
-            android:id="@+id/info_second_image"
+            android:id="@+id/info_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:paddingTop="5dp"
@@ -56,14 +56,14 @@
         <EditText
             android:textSize="22sp"
             android:hint="지도에서 표시될 내용을 입력해 주세요"
-            android:id="@+id/info_second_content"
+            android:id="@+id/info_content"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:paddingRight="30dp" />
 
         <Button
-            android:id="@+id/info_second_btn"
+            android:id="@+id/info_btn"
             android:layout_width="75dp"
             android:layout_height="50dp"
             android:background="#EDBC00"

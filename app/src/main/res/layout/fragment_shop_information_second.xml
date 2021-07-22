@@ -10,7 +10,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/info_second_image"
+            android:id="@+id/second_info_image"
             android:layout_width="289dp"
             android:layout_height="233dp"
             android:layout_marginStart="61dp"
@@ -21,30 +21,30 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:src="@drawable/plus"
-            app:layout_constraintBottom_toTopOf="@+id/info_second_content"
+            app:layout_constraintBottom_toTopOf="@+id/info_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <EditText
-            android:id="@+id/info_second_content"
+            android:id="@+id/second_info_content"
             android:layout_width="385dp"
             android:layout_height="256dp"
             android:layout_marginStart="13dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="45dp"
             android:layout_marginEnd="13dp"
-            android:layout_marginBottom="57dp"
+            android:layout_marginBottom="24dp"
             android:hint="표시될 내용을 입력해 주세요"
             android:paddingTop="10dp"
             android:paddingRight="30dp"
             android:textSize="22sp"
-            app:layout_constraintBottom_toTopOf="@+id/info_second_btn"
+            app:layout_constraintBottom_toTopOf="@+id/second_info_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_second_image" />
+            app:layout_constraintTop_toBottomOf="@+id/second_info_image" />
 
         <Button
-            android:id="@+id/info_second_btn"
+            android:id="@+id/second_info_btn"
             android:layout_width="75dp"
             android:layout_height="50dp"
             android:layout_marginEnd="16dp"

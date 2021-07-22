@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_shop"
@@ -21,7 +21,6 @@
         android:layout_height="47dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="52dp"
-        android:text="TextView"
         android:textColor="#000000"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +42,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="47dp"
         android:layout_marginTop="60dp"
-        android:text="뭐넣을지 모르겠음"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_shop" />
 </androidx.constraintlayout.widget.ConstraintLayout>

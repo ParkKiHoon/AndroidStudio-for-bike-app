@@ -68,9 +68,9 @@ public class ShopInformationFragment extends Fragment implements OnMapReadyCallb
         nickname=getArguments().getString("nickname");
         mapView = (MapView)view.findViewById(R.id.info_map);
         mapView.getMapAsync(this);
-        info_content=view.findViewById(R.id.info_second_content);
-        info_image=view.findViewById(R.id.info_second_image);
-        info_btn=view.findViewById(R.id.info_second_btn);
+        info_content=view.findViewById(R.id.info_content);
+        info_image=view.findViewById(R.id.info_image);
+        info_btn=view.findViewById(R.id.info_btn);
         info_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,7 +189,8 @@ public class ShopInformationFragment extends Fragment implements OnMapReadyCallb
                 latitude=gpsTracker.getLatitude();
                 longitude =gpsTracker.getLongitude();
                 String address = getCurrentAddress(latitude, longitude);
-                LatLng latLng = new LatLng(35.230036, 129.088434); //LatLng latLng = new LatLng(latitude, longitude);
+                latitude=35.230513; longitude=129.090127; // 지우면됨!!
+                LatLng latLng = new LatLng(latitude, longitude);
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
                     setCustomMarkerView();
                     tv_marker.setText(nickname);

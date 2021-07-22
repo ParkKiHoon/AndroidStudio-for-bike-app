@@ -1,11 +1,11 @@
 package com.example.bike2;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,14 +20,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -62,9 +60,9 @@ public class SecondShopInformationFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_shop_information_second,container,false);
-        info_second_content=view.findViewById(R.id.info_second_content);
-        info_second_image=view.findViewById(R.id.info_second_image);
-        info_second_btn=view.findViewById(R.id.info_second_btn);
+        info_second_content=view.findViewById(R.id.second_info_content);
+        info_second_image=view.findViewById(R.id.second_info_image);
+        info_second_btn=view.findViewById(R.id.second_info_btn);
         nickname=getArguments().getString("nickname");
         content=getArguments().getString("content");
         photoUri=getArguments().getParcelable("uri");
@@ -111,7 +109,74 @@ public class SecondShopInformationFragment extends Fragment {
                             @Override
                             public void onSuccess(Uri uri) {
                                 downloadUrl=uri.toString();
-                                cnt--;
+                                String second_filename = cu + "_" + System.currentTimeMillis();
+                                StorageReference second_storageRef = storage.getReferenceFromUrl("gs://bike-71038.appspot.com/").child("shops/" + second_filename);
+                                UploadTask second_uploadTask;
+                                Uri second_file = null;
+                                second_file = second_photoUri;
+                                second_uploadTask = second_storageRef.putFile(second_file);
+                                second_uploadTask.addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception exception) {
+                                        Log.v("알림", "사진 업로드 실패");
+                                        exception.printStackTrace();
+                                    }
+                                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot2) {
+                                        Task<Uri> result = taskSnapshot2.getMetadata().getReference().getDownloadUrl();
+                                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                second_downloadUrl=uri.toString();
+                                                FirebaseFirestore db = FirebaseFirestore.getInstance();;
+                                                DocumentReference docRef = db.collection("users").document(user.getUid());
+                                                Map<String, Object> temp = new HashMap<>();
+                                                temp.put("image", downloadUrl);
+                                                temp.put("nickname", nickname);
+                                                temp.put("latitude", latitude);
+                                                temp.put("longitude", longitude);
+                                                temp.put("contents", content);
+                                                temp.put("isShop","true");
+                                                docRef.set(temp)
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void aVoid) {
+                                                                Map<String, Object> temp2 = new HashMap<>();
+                                                                temp2.put("image", second_downloadUrl);
+                                                                temp2.put("shopname", nickname);
+                                                                temp2.put("contents", info_second_content.getText().toString());
+                                                                docRef.collection("myShop").add(temp2)
+                                                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                                            @Override
+                                                                            public void onSuccess(DocumentReference documentReference) {
+                                                                                Log.d("TAG", "DocumentSnapshot successfully written!");
+                                                                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                                                                fragmentManager.beginTransaction().remove(SecondShopInformationFragment.this).commit();
+                                                                                fragmentManager.popBackStack();
+                                                                                ((ShopInformationActivity) getActivity()).finish();
+                                                                            }
+                                                                        })
+                                                                        .addOnFailureListener(new OnFailureListener() {
+                                                                            @Override
+                                                                            public void onFailure(@NonNull Exception e) {
+                                                                                Log.d("TAG", "Error writing document", e);
+                                                                            }
+                                                                        });
+
+                                                            }
+                                                        })
+                                                        .addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Log.w("TAG", "Error writing document", e);
+                                                            }
+                                                        });
+                                            }
+                                        });
+                                    }
+                                });
+
                             }
                         });
                     }
@@ -119,89 +184,6 @@ public class SecondShopInformationFragment extends Fragment {
 
 
 
-
-
-                if(cnt==3) {
-
-                    String second_filename = cu + "_" + System.currentTimeMillis();
-                    StorageReference second_storageRef = storage.getReferenceFromUrl("gs://bike-71038.appspot.com/").child("shops/" + second_filename);
-                    UploadTask second_uploadTask;
-                    Uri second_file = null;
-                    second_file = second_photoUri;
-                    second_uploadTask = second_storageRef.putFile(second_file);
-                    second_uploadTask.addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            Log.v("알림", "사진 업로드 실패");
-                            exception.printStackTrace();
-                        }
-                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot2) {
-                            Task<Uri> result = taskSnapshot2.getMetadata().getReference().getDownloadUrl();
-                            result.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    second_downloadUrl=uri.toString();
-                                    cnt--;
-                                }
-                            });
-                        }
-                    });
-
-                }
-
-
-
-                FirebaseFirestore db = FirebaseFirestore.getInstance();;
-                DocumentReference docRef = db.collection("users").document(user.getUid());
-                if(cnt==2) {
-                    Map<String, Object> temp = new HashMap<>();
-                    temp.put("image", downloadUrl);
-                    temp.put("nickname", nickname);
-                    temp.put("latitude", latitude);
-                    temp.put("longitude", longitude);
-                    temp.put("contents", content);
-                    docRef.set(temp)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    cnt--;
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w("TAG", "Error writing document", e);
-                                }
-                            });
-
-                }
-
-
-                if(cnt==1) {
-                    Map<String, Object> temp2 = new HashMap<>();
-                    temp2.put("image", second_downloadUrl);
-                    temp2.put("shopname", nickname);
-                    temp2.put("contents", info_second_content);
-                    docRef.collection("myShop").add(temp2)
-                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                @Override
-                                public void onSuccess(DocumentReference documentReference) {
-                                    Log.d("TAG", "DocumentSnapshot successfully written!");
-                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                    fragmentManager.beginTransaction().remove(SecondShopInformationFragment.this).commit();
-                                    fragmentManager.popBackStack();
-                                    ((ShopInformationActivity) getActivity()).finish();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.d("TAG", "Error writing document", e);
-                                }
-                            });
-                }
             }
         });
         return view;

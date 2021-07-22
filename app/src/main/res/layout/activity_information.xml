@@ -24,7 +24,7 @@
             android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="점포 운영자 (구현안해둠 클릭ㄴㄴ)" />
+            android:text="점포 운영자" />
     </RadioGroup>
 
     <EditText

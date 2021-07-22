@@ -329,7 +329,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public boolean onMarkerClick(Marker marker) {
         Intent intent=new Intent(getActivity(),MyCustomActivity.class);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("shops").document(marker.getTag().toString());
+        DocumentReference docRef = db.collection("users").document(marker.getTag().toString());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -337,6 +337,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         cur_id=marker.getTag().toString();
+                        Log.d("aaaaaaaaaaa",cur_id);
                         if(isPageOpen){
                             page.startAnimation(tranlateDownAnim);
                             page2.setVisibility(View.GONE);
