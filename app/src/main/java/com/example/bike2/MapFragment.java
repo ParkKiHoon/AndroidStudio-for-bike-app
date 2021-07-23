@@ -76,6 +76,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     TextView map_content;
     ImageView map_image;
     String cur_id;
+    String[] name,part;
+
+    public static MapFragment newInstance(){
+        return new MapFragment();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -91,11 +97,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         page2 = view.findViewById(R.id.page2);
         map_content=view.findViewById(R.id.map_content);
         map_image=view.findViewById(R.id.map_image);
+
+        try {
+            name=getArguments().getStringArray("name");
+            part=getArguments().getStringArray("part");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         page2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(),ShopActivity.class);
                 intent.putExtra("id",cur_id);
+                intent.putExtra("name",name);
+                intent.putExtra("part",part);
                 startActivity(intent);
             }
         });
@@ -337,7 +355,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         cur_id=marker.getTag().toString();
-                        Log.d("aaaaaaaaaaa",cur_id);
                         if(isPageOpen){
                             page.startAnimation(tranlateDownAnim);
                             page2.setVisibility(View.GONE);

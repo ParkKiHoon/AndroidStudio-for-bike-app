@@ -6,12 +6,14 @@ public class ChatActivityData {
     private int is_right;
     private String tv_chat;
     private Long tv_time;
+    private String is_estimate;
 
-    public ChatActivityData(String tv_nickname, int is_right, String tv_chat, Long tv_time) {
+    public ChatActivityData(String tv_nickname, int is_right, String tv_chat, Long tv_time,String is_estimate) {
         this.tv_nickname = tv_nickname;
         this.is_right=is_right;
         this.tv_chat = tv_chat;
         this.tv_time = tv_time;
+        this.is_estimate=is_estimate;
     }
 
 
@@ -45,5 +47,13 @@ public class ChatActivityData {
 
     public void setTv_time(Long tv_time) {
         this.tv_time = tv_time;
+    }
+
+    public String getIs_estimate() {
+        return is_estimate;
+    }
+
+    public void setIs_estimate(String is_estimate) {
+        this.is_estimate=is_estimate;
     }
 }

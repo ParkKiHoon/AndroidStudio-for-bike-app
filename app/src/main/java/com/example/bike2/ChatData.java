@@ -6,7 +6,6 @@ public class ChatData {
     private String tv_nickname;
     private String tv_chat;
     private Long tv_time;
-
     public ChatData(String room_num, String tv_nickname, String tv_chat, Long tv_time) {
         this.room_num = room_num;
         this.tv_nickname = tv_nickname;
@@ -46,4 +45,5 @@ public class ChatData {
     public void setTv_time(Long tv_time) {
         this.tv_time = tv_time;
     }
+
 }

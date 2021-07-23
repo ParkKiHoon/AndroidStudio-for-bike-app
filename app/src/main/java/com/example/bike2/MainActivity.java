@@ -20,6 +20,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -234,4 +235,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void replaceFragment(Fragment fragment, String[] name, String[] part) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Bundle bundle=new Bundle();
+        bundle.putStringArray("name",name);
+        bundle.putStringArray("part",part);
+        fragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.main_frame, fragment).commit();
+    }
 }

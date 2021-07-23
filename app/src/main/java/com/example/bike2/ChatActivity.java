@@ -1,5 +1,6 @@
 package com.example.bike2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,12 +40,21 @@ public class ChatActivity extends AppCompatActivity {
     private String room_num,uid_you,uid_me;
     private String nickName_you,nickName_me;
     private String last_text,last_time;
+    String name[],part[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        room_num = getIntent().getStringExtra("room_num");
+        Intent intent=getIntent();
+        room_num = intent.getStringExtra("room_num");
+        try {
+            name=intent.getStringArrayExtra("name");
+            part=intent.getStringArrayExtra("part");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         et_message=findViewById(R.id.et_message);
         btn_send=findViewById(R.id.btn_send);
         uid_me= FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -55,13 +65,16 @@ public class ChatActivity extends AppCompatActivity {
         chatActivityAdapter = new ChatActivityAdapter(arrayList);
         recyclerView.setAdapter(chatActivityAdapter);
         get_uid();
+
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 send_message();
             }
         });
-
+        if(name!=null){
+            send_estimate();
+        }
     }
 
     private void get_uid(){
@@ -173,19 +186,19 @@ public class ChatActivity extends AppCompatActivity {
                             switch (dc.getType()) {
                                 case ADDED:{
                                     ChatActivityData chatActivityData;
+                                    String isEstimate=dc.getDocument().get("isEstimate").toString();
                                     String temp_text=dc.getDocument().get("text").toString();
                                     String temp_time=dc.getDocument().get("timestam").toString();
                                     if((dc.getDocument().get("fromUid").toString()).equals(uid_me)){
-                                        chatActivityData= new ChatActivityData(nickName_me,1,temp_text, Long.parseLong(temp_time));
+                                        chatActivityData= new ChatActivityData(nickName_me,1,temp_text, Long.parseLong(temp_time),isEstimate);
                                     }
                                     else{
-                                        chatActivityData= new ChatActivityData(nickName_you,0,temp_text, Long.parseLong(temp_time));
+                                        chatActivityData= new ChatActivityData(nickName_you,0,temp_text, Long.parseLong(temp_time),isEstimate);
                                     }
                                     arrayList.add(chatActivityData);
                                     chatActivityAdapter.notifyDataSetChanged();
                                     last_text=temp_text;
                                     last_time=temp_time;
-
 
 
                                 }
@@ -204,6 +217,30 @@ public class ChatActivity extends AppCompatActivity {
         temp.put("text",et_message.getText().toString());
         temp.put("timestam",System.currentTimeMillis());
         temp.put("fromUid",uid_me);
+        temp.put("isEstimate","0");
+        db.collection("chats").document(room_num).collection("messages").add(temp)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("TAG", "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error writing document", e);
+                    }
+                });
+    }
+
+    private void send_estimate(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Map<String, Object> temp;
+        temp = new HashMap<>();
+        temp.put("text","견적요청!");
+        temp.put("timestam",System.currentTimeMillis());
+        temp.put("fromUid",uid_me);
+        temp.put("isEstimate",name[0]+","+name[1]+","+name[2]+","+name[3]+","+name[4]+","+part[0]+","+part[1]+","+part[2]+","+part[3]+","+part[4]);
         db.collection("chats").document(room_num).collection("messages").add(temp)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override

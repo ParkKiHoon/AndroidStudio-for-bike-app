@@ -1,7 +1,8 @@
 package com.example.bike2;
 
-import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,7 +23,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -33,8 +30,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.unity3d.player.PopupActivity;
 import com.unity3d.player.UnityPlayerActivity;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,7 +61,6 @@ public class HomeFragment extends Fragment {
     String title;
     float weight=0;
     float price=0;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -103,6 +100,7 @@ public class HomeFragment extends Fragment {
                 ArrayList<String> groupset_name = new ArrayList<String>();
                 ArrayList<String> groupset_value = new ArrayList<String>();
                 ArrayList<String> groupset_image = new ArrayList<String>();
+
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 db.collection("frame")
                         .get()
@@ -114,6 +112,8 @@ public class HomeFragment extends Fragment {
                                         frame_name.add(document.get("name").toString());
                                         frame_value.add(document.get("value").toString());
                                         frame_image.add(document.get("image").toString());
+                                      //  getStock(document.get("name").toString(),1);
+
                                     }
                                     db.collection("wheelset")
                                             .get()
@@ -125,6 +125,7 @@ public class HomeFragment extends Fragment {
                                                             wheelset_name.add(document.get("name").toString());
                                                             wheelset_value.add(document.get("value").toString());
                                                             wheelset_image.add(document.get("image").toString());
+                                                           // getStock(document.get("name").toString(),2);
                                                         }
                                                         db.collection("handlebar")
                                                                 .get()
@@ -136,6 +137,7 @@ public class HomeFragment extends Fragment {
                                                                                 handlebar_name.add(document.get("name").toString());
                                                                                 handlebar_value.add(document.get("value").toString());
                                                                                 handlebar_image.add(document.get("image").toString());
+                                                                                //getStock(document.get("name").toString(),3);
                                                                             }
                                                                             db.collection("saddle")
                                                                                     .get()
@@ -147,6 +149,7 @@ public class HomeFragment extends Fragment {
                                                                                                     saddle_name.add(document.get("name").toString());
                                                                                                     saddle_value.add(document.get("value").toString());
                                                                                                     saddle_image.add(document.get("image").toString());
+                                                                                                    //getStock(document.get("name").toString(),4);
                                                                                                 }
                                                                                                 db.collection("groupset")
                                                                                                         .get()
@@ -270,12 +273,13 @@ public class HomeFragment extends Fragment {
                     Toast.makeText(getActivity(),"'견적내기'를 먼저 해주세요",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Toast.makeText(getActivity(),"아직x",Toast.LENGTH_SHORT).show();
+                ((MainActivity)getActivity()).replaceFragment(MapFragment.newInstance(),name,part);
             }
         });
 
         return view;
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

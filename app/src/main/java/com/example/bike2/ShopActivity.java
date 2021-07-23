@@ -35,6 +35,7 @@ public class ShopActivity extends AppCompatActivity {
     TextView tv_shop2;
     Button bt_shop;
     String uid;
+    String name[],part[];
     private int same=0;
     private String room_num,uid_me;
     @Override
@@ -43,6 +44,13 @@ public class ShopActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shop);
         Intent intent= getIntent();
         uid=intent.getStringExtra("id");
+        try {
+            name=intent.getStringArrayExtra("name");
+            part=intent.getStringArrayExtra("part");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         iv_shop=findViewById(R.id.iv_shop);
         tv_shop=findViewById(R.id.tv_shop);
         tv_shop2=findViewById(R.id.tv_shop2);
@@ -98,6 +106,10 @@ public class ShopActivity extends AppCompatActivity {
                                 if((temp1.equals(uid)&&temp2.equals(uid_me))||(temp1.equals(uid_me)&&temp2.equals(uid))){
                                     same++;
                                     intent.putExtra("room_num",document.getId());
+                                    if(name!=null) {
+                                        intent.putExtra("name", name);
+                                        intent.putExtra("part", part);
+                                    }
                                     startActivity(intent);
                                 }
                             }
@@ -122,6 +134,10 @@ public class ShopActivity extends AppCompatActivity {
                         room_num=documentReference.getId();
                         Intent intent=new Intent(ShopActivity.this,ChatActivity.class);
                         intent.putExtra("room_num",room_num);
+                        if(name!=null) {
+                            intent.putExtra("name", name);
+                            intent.putExtra("part", part);
+                        }
                         startActivity(intent);
                     }
                 })
