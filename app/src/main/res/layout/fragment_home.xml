@@ -16,7 +16,7 @@
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:backgroundTint="#7C4DFF"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/btn_ai"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"

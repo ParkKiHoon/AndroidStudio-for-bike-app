@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/ai_text" />
 
     <Button
         android:id="@+id/btn_in_information"
@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_in_information" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/ai_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="사용하실 닉네임을 입력해주세요"

@@ -198,7 +198,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                             for(QueryDocumentSnapshot document : task.getResult()){
                                 setCustomMarkerView();
                                 tv_marker.setText(document.get("nickname").toString());
-                                tv_marker2.setText("etc...");
+                                tv_marker2.setText("");
                                 MarkerOptions makerOptions = new MarkerOptions();
                                 makerOptions.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getActivity(), marker_root_view)))
                                         .alpha(0.5f)

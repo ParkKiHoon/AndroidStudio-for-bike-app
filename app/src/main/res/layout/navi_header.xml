@@ -9,7 +9,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/product_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/ic_launcher_round" />
@@ -20,7 +20,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/btn_ai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

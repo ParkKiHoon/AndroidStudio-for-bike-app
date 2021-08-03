@@ -13,12 +13,13 @@
         android:layout_height="60dp"
         android:layout_marginTop="50dp"
         android:background="#EDBC00"
-        android:text="선호도 조사 및 가입하기"
+        android:text="가입하기"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/et_pw2_in_reg"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/et_pw2_in_reg"
         app:layout_constraintTop_toBottomOf="@+id/et_pw2_in_reg" />
 
@@ -59,10 +60,10 @@
         app:layout_constraintBottom_toTopOf="@+id/et_pw_in_reg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_ai" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/btn_ai"
         android:layout_width="212dp"
         android:layout_height="81dp"
         android:layout_marginTop="10dp"
@@ -73,13 +74,13 @@
         android:textColorHint="#FFFFFF"
         android:textSize="50sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/btn_self"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/btn_self"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="200dp"
@@ -89,7 +90,7 @@
         android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/tv_login_in_reg"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_ai" />
 
     <TextView
         android:id="@+id/tv_login_in_reg"
@@ -103,7 +104,7 @@
         android:textColor="#EDBC00"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@+id/btn_self"
+        app:layout_constraintTop_toBottomOf="@+id/btn_ai" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

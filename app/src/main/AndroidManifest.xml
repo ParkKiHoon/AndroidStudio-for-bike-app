@@ -15,7 +15,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bike2">
-        <activity android:name=".EstimateActivity"></activity>
+        <activity android:name=".AiSub"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".AiMain"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".SelectActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".EstimateActivity" />
         <activity android:name=".ShopInformationActivity" />
         <activity
             android:name=".ShopActivity"
