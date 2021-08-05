@@ -125,8 +125,8 @@ public class AiMain extends AppCompatActivity implements View.OnClickListener {
                         }
                         TextView showmyTr = findViewById(R.id.show_text);
                         showmyTr.setText(gotFrameNames[randomNums[0]]+" / "+gotFrameValue[randomNums[0]]);
-                        int temp=currentnumOfProduct+1;
-                        ai_text.setText(" 프레임 별점 ("+ temp +"/5)");
+                        final int[] temp = {currentnumOfProduct + 1};
+                        ai_text.setText(" 프레임 별점 ("+ temp[0] +"/5)");
                         product_image = (ImageView) findViewById(R.id.product_image);
                         String url = gotFrameImages[randomNums[0]];
                         Glide.with(AiMain.this).load(url).into(product_image);
@@ -163,7 +163,12 @@ public class AiMain extends AppCompatActivity implements View.OnClickListener {
 
                                             tv_ai_main.setText(review_nickname.get(list.get(0))+" : "+review_content.get(list.get(0)));
                                             tv_ai_main2.setText(review_nickname.get(list.get(1))+" : "+review_content.get(list.get(1)));
-                                            ratingBar2.setRating((review_rating.get(list.get(0))+review_rating.get(list.get(1)))/2);
+                                            float temp_rating=0;
+                                            for(int i=0;i<review_rating.size();i++){
+                                                temp_rating +=review_rating.get(i);
+                                            }
+                                            temp_rating=temp_rating/review_rating.size();
+                                            ratingBar2.setRating(temp_rating);
                                         } else {
                                         }
                                     }
@@ -229,7 +234,12 @@ public class AiMain extends AppCompatActivity implements View.OnClickListener {
                                     Log.d("AAA",Integer.toString(list.get(1)));
                                     tv_ai_main.setText(review_nickname.get(list.get(0))+" : "+review_content.get(list.get(0)));
                                     tv_ai_main2.setText(review_nickname.get(list.get(1))+" : "+review_content.get(list.get(1)));
-                                    ratingBar2.setRating((review_rating.get(list.get(0))+review_rating.get(list.get(1)))/2);
+                                    float temp_rating=0;
+                                    for(int i=0;i<review_rating.size();i++){
+                                        temp_rating +=review_rating.get(i);
+                                    }
+                                    temp_rating=temp_rating/review_rating.size();
+                                    ratingBar2.setRating(temp_rating);
                                 } else {
                                 }
                             }
