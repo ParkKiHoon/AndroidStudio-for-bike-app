@@ -48,7 +48,7 @@ public class AiMain extends AppCompatActivity implements View.OnClickListener {
     private DataOutputStream dos;
     private DataInputStream dis;
 
-    private String ip = "121.174.217.51"; // IP 번호
+    private String ip = "192.168.219.106"; // IP 번호
     private int port = 1991; // port 번호
     private String[][] sendMsg = new String[5][2];;
     private static String STOP_MSG = "stop";
@@ -273,7 +273,7 @@ public class AiMain extends AppCompatActivity implements View.OnClickListener {
         Thread checkUpdate = new Thread() {
             public void run() {
 // ip받기
-                String newip = String.valueOf("121.174.217.51");
+                String newip = String.valueOf("192.168.219.106");
 
 // 서버 접속
                 try {
