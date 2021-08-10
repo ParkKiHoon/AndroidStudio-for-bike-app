@@ -20,7 +20,6 @@ public class Loading extends Activity {
 
         loading_view=findViewById(R.id.loading_view);
         Glide.with(this).load(R.drawable.loading).into(loading_view);
-
         Handler handler=new Handler();
         handler.postDelayed(new Runnable() {
             @Override

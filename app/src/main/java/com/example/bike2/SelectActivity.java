@@ -17,11 +17,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.unity3d.player.AiMain;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class SelectActivity extends AppCompatActivity {
 
     Button btn_ai,btn_self;
-    ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +62,7 @@ public class SelectActivity extends AppCompatActivity {
         btn_ai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),AiMain.class);
+                Intent intent=new Intent(getApplicationContext(),LoadingBike.class);
                 startActivity(intent);
             }
         });
@@ -72,4 +77,5 @@ public class SelectActivity extends AppCompatActivity {
 
 
     }
+
 }
