@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -55,6 +58,10 @@ public class HomeFragment extends Fragment {
     private TextView tv_home_9;
     private TextView tv_home_11;
 
+    private Animation fab_open, fab_close;
+    private Boolean isFabOpen = false;
+    private FloatingActionButton fab, fab1, fab2;
+
     String[] name;
     String[] part;
     String[] image;
@@ -80,6 +87,32 @@ public class HomeFragment extends Fragment {
         tv_home_7=view.findViewById(R.id.tv_home_7);
         tv_home_9=view.findViewById(R.id.tv_home_9);
         tv_home_11=view.findViewById(R.id.tv_home_11);
+
+        fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.float_open);
+        fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.float_close);
+
+        fab = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
+        fab1 = (FloatingActionButton) view.findViewById(R.id.floatingActionButton2);
+        fab2 = (FloatingActionButton) view.findViewById(R.id.floatingActionButton3);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                anim();
+            }
+        });
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                anim();
+            }
+        });
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                anim();
+            }
+        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -339,6 +372,25 @@ public class HomeFragment extends Fragment {
                             Log.d("TAG", "Error writing document", e);
                         }
                     });
+        }
+    }
+
+
+
+    public void anim() {
+
+        if (isFabOpen) {
+            fab1.startAnimation(fab_close);
+            fab2.startAnimation(fab_close);
+            fab1.setClickable(false);
+            fab2.setClickable(false);
+            isFabOpen = false;
+        } else {
+            fab1.startAnimation(fab_open);
+            fab2.startAnimation(fab_open);
+            fab1.setClickable(true);
+            fab2.setClickable(true);
+            isFabOpen = true;
         }
     }
 
