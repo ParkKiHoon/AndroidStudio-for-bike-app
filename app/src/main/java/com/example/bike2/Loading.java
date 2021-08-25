@@ -28,7 +28,7 @@ public class Loading extends Activity {
                 if(FirebaseAuth.getInstance().getCurrentUser()==null||!FirebaseAuth.getInstance().getCurrentUser().isEmailVerified())
                     {intent=new Intent(getBaseContext(),LoginActivity.class);}
                 else
-                    {intent=new Intent(getBaseContext(),SelectActivity.class);}
+                    {intent=new Intent(getBaseContext(),MainActivity.class);}
                 startActivity(intent);
                 finish();
             }

@@ -93,12 +93,11 @@ public class MainActivity extends AppCompatActivity {
         if(getSupportActionBar()!=null){
             Drawable drawable= getResources().getDrawable(R.drawable.settings);
             Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-            Drawable newdrawable = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 30, 30, true));
+            Drawable newdrawable = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 35, 35, true));
             newdrawable.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(newdrawable);
-
         }
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);

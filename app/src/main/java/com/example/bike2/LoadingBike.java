@@ -48,7 +48,7 @@ public class LoadingBike extends Activity {
         setContentView(R.layout.loading_bike);
 
         loading_bike=findViewById(R.id.loading_bike);
-        Glide.with(this).load(R.drawable.loading_bike).into(loading_bike);
+        Glide.with(this).load(R.drawable.frame_loading).into(loading_bike);
 
         Intent intent=new Intent(getApplicationContext(), AiMain.class);
         FirebaseFirestore db = FirebaseFirestore.getInstance();

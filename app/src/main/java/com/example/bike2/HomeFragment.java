@@ -1,8 +1,6 @@
 package com.example.bike2;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,12 +29,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.unity3d.player.UnityPlayerActivity;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,19 +53,18 @@ public class HomeFragment extends Fragment {
 
     private Animation fab_open, fab_close;
     private Boolean isFabOpen = false;
-    private FloatingActionButton fab, fab1, fab2;
+    private FloatingActionButton fab, fab1, fab2,fab3;
+    private TextView ft1,ft2,ft3;
 
     String[] name;
     String[] part;
     String[] image;
-    String title;
     float weight=0;
     float price=0;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
-        button=view.findViewById(R.id.button);
         button_home=view.findViewById(R.id.btn_home);
         button_home1=view.findViewById(R.id.btn_home1);
         button_home2=view.findViewById(R.id.btn_home2);
@@ -94,6 +86,10 @@ public class HomeFragment extends Fragment {
         fab = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
         fab1 = (FloatingActionButton) view.findViewById(R.id.floatingActionButton2);
         fab2 = (FloatingActionButton) view.findViewById(R.id.floatingActionButton3);
+        fab3 = (FloatingActionButton) view.findViewById(R.id.floatingActionButton4);
+        ft1=view.findViewById(R.id.floatingtext2);
+        ft2=view.findViewById(R.id.floatingtext3);
+        ft3=view.findViewById(R.id.floatingtext4);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,132 +101,45 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 anim();
+                Intent intent=new Intent(getActivity(),LoadingSelf.class);
+                startActivity(intent);
             }
         });
+        ft1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                anim();
+                Intent intent=new Intent(getActivity(),LoadingSelf.class);
+                startActivity(intent);
+            }
+        });
+
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 anim();
             }
         });
-
-        button.setOnClickListener(new View.OnClickListener() {
+        ft2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final boolean[] cnt = new boolean[5];
-                ArrayList<String> frame_name=new ArrayList<String>();
-                ArrayList<String> frame_value=new ArrayList<String>();
-                ArrayList<String> frame_image=new ArrayList<String>();
-                ArrayList<String> wheelset_name =new ArrayList<String>();
-                ArrayList<String> wheelset_value =new ArrayList<String>();
-                ArrayList<String> wheelset_image =new ArrayList<String>();
-                ArrayList<String> handlebar_name =new ArrayList<String>();
-                ArrayList<String> handlebar_value = new ArrayList<String>();
-                ArrayList<String> handlebar_image = new ArrayList<String>();
-                ArrayList<String> saddle_name =new ArrayList<String>();
-                ArrayList<String> saddle_value = new ArrayList<String>();
-                ArrayList<String> saddle_image = new ArrayList<String>();
-                ArrayList<String> groupset_name = new ArrayList<String>();
-                ArrayList<String> groupset_value = new ArrayList<String>();
-                ArrayList<String> groupset_image = new ArrayList<String>();
-
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                db.collection("frame")
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        frame_name.add(document.get("name").toString());
-                                        frame_value.add(document.get("value").toString());
-                                        frame_image.add(document.get("image").toString());
-                                      //  getStock(document.get("name").toString(),1);
-
-                                    }
-                                    db.collection("wheelset")
-                                            .get()
-                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<QuerySnapshot> task2) {
-                                                    if (task2.isSuccessful()) {
-                                                        for (QueryDocumentSnapshot document : task2.getResult()) {
-                                                            wheelset_name.add(document.get("name").toString());
-                                                            wheelset_value.add(document.get("value").toString());
-                                                            wheelset_image.add(document.get("image").toString());
-                                                           // getStock(document.get("name").toString(),2);
-                                                        }
-                                                        db.collection("handlebar")
-                                                                .get()
-                                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                                    @Override
-                                                                    public void onComplete(@NonNull Task<QuerySnapshot> task3) {
-                                                                        if (task3.isSuccessful()) {
-                                                                            for (QueryDocumentSnapshot document : task3.getResult()) {
-                                                                                handlebar_name.add(document.get("name").toString());
-                                                                                handlebar_value.add(document.get("value").toString());
-                                                                                handlebar_image.add(document.get("image").toString());
-                                                                                //getStock(document.get("name").toString(),3);
-                                                                            }
-                                                                            db.collection("saddle")
-                                                                                    .get()
-                                                                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                                                        @Override
-                                                                                        public void onComplete(@NonNull Task<QuerySnapshot> task4) {
-                                                                                            if (task4.isSuccessful()) {
-                                                                                                for (QueryDocumentSnapshot document : task4.getResult()) {
-                                                                                                    saddle_name.add(document.get("name").toString());
-                                                                                                    saddle_value.add(document.get("value").toString());
-                                                                                                    saddle_image.add(document.get("image").toString());
-                                                                                                    //getStock(document.get("name").toString(),4);
-                                                                                                }
-                                                                                                db.collection("groupset")
-                                                                                                        .get()
-                                                                                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                                                                            @Override
-                                                                                                            public void onComplete(@NonNull Task<QuerySnapshot> task5) {
-                                                                                                                if (task5.isSuccessful()) {
-                                                                                                                    for (QueryDocumentSnapshot document : task5.getResult()) {
-                                                                                                                        groupset_name.add(document.get("name").toString());
-                                                                                                                        groupset_value.add(document.get("value").toString());
-                                                                                                                        groupset_image.add(document.get("image").toString());
-                                                                                                                    }
-                                                                                                                    Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                                                                                                                    intent.putStringArrayListExtra("frame_name",frame_name);
-                                                                                                                    intent.putStringArrayListExtra("frame_value",frame_value);
-                                                                                                                    intent.putStringArrayListExtra("frame_image",frame_image);
-                                                                                                                    intent.putStringArrayListExtra("wheelset_name",wheelset_name);
-                                                                                                                    intent.putStringArrayListExtra("wheelset_value",wheelset_value);
-                                                                                                                    intent.putStringArrayListExtra("wheelset_image",wheelset_image);
-                                                                                                                    intent.putStringArrayListExtra("handlebar_name",handlebar_name);
-                                                                                                                    intent.putStringArrayListExtra("handlebar_value",handlebar_value);
-                                                                                                                    intent.putStringArrayListExtra("handlebar_image",handlebar_image);
-                                                                                                                    intent.putStringArrayListExtra("saddle_name",saddle_name);
-                                                                                                                    intent.putStringArrayListExtra("saddle_value",saddle_value);
-                                                                                                                    intent.putStringArrayListExtra("saddle_image",saddle_image);
-                                                                                                                    intent.putStringArrayListExtra("groupset_name",groupset_name);
-                                                                                                                    intent.putStringArrayListExtra("groupset_value",groupset_value);
-                                                                                                                    intent.putStringArrayListExtra("groupset_image",groupset_image);
-                                                                                                                    startActivityForResult(intent,8080);
-                                                                                                                }
-                                                                                                            }
-                                                                                                        });
-                                                                                            }
-                                                                                        }
-                                                                                    });
-                                                                        }
-                                                                    }
-                                                                });
-                                                    }
-                                                }
-                                            });
-                                }
-                            }
-                        });
-
-
+                anim();
             }
         });
+
+        fab3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                anim();
+            }
+        });
+        ft3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                anim();
+            }
+        });
+
 
         button_home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -382,15 +291,27 @@ public class HomeFragment extends Fragment {
         if (isFabOpen) {
             fab1.startAnimation(fab_close);
             fab2.startAnimation(fab_close);
+            fab3.startAnimation(fab_close);
             fab1.setClickable(false);
             fab2.setClickable(false);
+            fab3.setClickable(false);
+            ft1.setVisibility(View.GONE);
+            ft2.setVisibility(View.GONE);
+            ft3.setVisibility(View.GONE);
             isFabOpen = false;
+            fab.setImageResource(R.drawable.float1);
         } else {
             fab1.startAnimation(fab_open);
             fab2.startAnimation(fab_open);
+            fab3.startAnimation(fab_open);
             fab1.setClickable(true);
             fab2.setClickable(true);
+            fab3.setClickable(true);
+            ft1.setVisibility(View.VISIBLE);
+            ft2.setVisibility(View.VISIBLE);
+            ft3.setVisibility(View.VISIBLE);
             isFabOpen = true;
+            fab.setImageResource(R.drawable.float2);
         }
     }
 

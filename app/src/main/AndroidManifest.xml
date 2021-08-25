@@ -42,6 +42,9 @@
         <activity android:name=".LoadingBike"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity android:name=".LoadingSelf"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
         <activity
             android:name=".SavePopupActivity"
             android:theme="@android:style/Theme.Dialog" />

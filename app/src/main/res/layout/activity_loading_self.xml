@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3F3F3">
+    android:background="#DEDEDE">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -201,12 +201,6 @@
             app:layout_constraintEnd_toEndOf="@+id/view_home_6"
             app:layout_constraintStart_toStartOf="@+id/view_home_6"
             app:layout_constraintTop_toTopOf="@+id/view_home_6" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -340,60 +334,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/btn_home1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="59dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/round"
-        android:text="공유"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:backgroundTint="#7C4DFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_home2"
-        app:layout_constraintStart_toEndOf="@+id/btn_home"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/btn_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/round"
-        android:text="저장"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:backgroundTint="#7C4DFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_home1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/btn_home2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/round"
-        android:text="견적신청"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:backgroundTint="#7C4DFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_home1"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
-        app:layout_constraintVertical_bias="0.0" />
-
     <TextView
         android:id="@+id/tv_home_11"
         android:layout_width="wrap_content"
@@ -406,133 +346,52 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
         android:layout_margin="15sp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="14dp"
-        android:backgroundTint="#cecece"
-        android:scaleType="center"
-        android:src="@drawable/float1"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="40dp"
+        android:clickable="true"
+        android:src="@drawable/floating1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/frameLayout" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="#CECECE"/>
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="200dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
-        app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/float3"
-            android:visibility="invisible"
-            app:backgroundTint="#ffffff"
-            app:elevation="6dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:pressedTranslationZ="12dp"
-            tools:layout_editor_absoluteY="584dp" />
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="90dp"
+        android:backgroundTint="#CECECE"
+        android:clickable="true"
+        android:src="@drawable/floating1"
+        android:visibility="visible"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:pressedTranslationZ="12dp"
+        app:fabSize="mini"/>
 
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/floatingtext2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:elevation="16dp"
-            android:text="셀프견적"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/white"
-            android:textSize="26sp"
-            android:textStyle="bold" />
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/frameLayout3"
-        android:layout_width="200dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton4"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="150dp"
+        android:backgroundTint="#CECECE"
+        android:clickable="true"
+        android:src="@drawable/floating1"
+        android:visibility="visible"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:pressedTranslationZ="12dp"
+        app:fabSize="mini"/>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/float5"
-            android:visibility="invisible"
-            app:backgroundTint="#ffffff"
-            app:elevation="6dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:pressedTranslationZ="12dp"
-            tools:layout_editor_absoluteY="460dp" />
-
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/floatingtext3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:elevation="16dp"
-            android:text="AI추천견적"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/white"
-            android:textSize="26sp"
-            android:textStyle="bold" />
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout3"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/float4"
-            android:visibility="invisible"
-            app:backgroundTint="#ffffff"
-            app:elevation="6dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:pressedTranslationZ="12dp"
-            tools:layout_editor_absoluteY="522dp" />
-
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/floatingtext4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:elevation="16dp"
-            android:text="견적가이드"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#BEFF00"
-            android:textSize="26sp"
-            android:textStyle="bold" />
-
-    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,7 @@
             <View
                 android:id="@+id/view_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="0dp"
                 android:background="@android:color/black"
                 android:layout_below="@+id/toolbar"/>
 
@@ -26,11 +26,11 @@
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="60dp">
 
                 <TextView
                     android:id="@+id/toolbar_title"
-                    android:text="Navigation Drawer"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center" />
