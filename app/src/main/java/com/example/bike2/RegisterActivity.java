@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,9 +24,9 @@ import com.google.firebase.auth.FirebaseUser;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText et_id_in_reg, et_pw_in_reg, et_pw2_in_reg;
-    private Button btn_register_in_reg;
-    private TextView tv_login_in_reg;
+    private ImageView btn_register_in_reg;
     private FirebaseAuth mAuth;
+    private CheckBox checkBox1,checkBox2,checkBox3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +37,25 @@ public class RegisterActivity extends AppCompatActivity {
         et_pw_in_reg = findViewById(R.id.et_pw_in_reg);
         et_pw2_in_reg = findViewById(R.id.et_pw2_in_reg);
         btn_register_in_reg = findViewById(R.id.btn_register_in_reg);
-        tv_login_in_reg = findViewById(R.id.tv_login_in_reg);
-
-
-        tv_login_in_reg.setOnClickListener(new View.OnClickListener() {
+        checkBox1=findViewById(R.id.checkBox);
+        checkBox2=findViewById(R.id.checkBox2);
+        checkBox3=findViewById(R.id.checkBox3);
+        checkBox1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
+                if(checkBox1.isChecked()) {
+                    checkBox1.setChecked(true);
+                    checkBox2.setChecked(true);
+                    checkBox3.setChecked(true);
+                }
+                else {
+                    checkBox1.setChecked(false);
+                    checkBox2.setChecked(false);
+                    checkBox3.setChecked(false);
+                }
             }
         });
+
 
         btn_register_in_reg.setOnClickListener(new View.OnClickListener() {
 
@@ -56,6 +67,10 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 if(et_pw2_in_reg.getText().toString().length()<6) {
                     Toast.makeText(getApplicationContext(), "비밀번호는 최소 6자 이상 사용하세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(checkBox2.isChecked()==false||checkBox3.isChecked()==false) {
+                    Toast.makeText(getApplicationContext(), "약관에 동의하여 주십시오.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 signUp();
@@ -91,4 +106,5 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "비밀번호가 틀립니다", Toast.LENGTH_SHORT).show();
         }
     }
+
 }
