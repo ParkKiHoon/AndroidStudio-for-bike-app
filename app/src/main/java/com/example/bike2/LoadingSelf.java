@@ -30,7 +30,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.unity3d.player.AiMain;
+import com.unity3d.player.Ai_Frame_Main;
 import com.unity3d.player.UnityPlayerActivity;
 
 import java.util.ArrayList;
@@ -95,7 +95,7 @@ public class LoadingSelf extends Activity {
         fab2 = (FloatingActionButton) findViewById(R.id.floatingActionButton4);
 
 
-        Intent intent = new Intent(getApplicationContext(), AiMain.class);
+        Intent intent = new Intent(getApplicationContext(), Ai_Frame_Main.class);
         final boolean[] cnt = new boolean[5];
         ArrayList<String> frame_name=new ArrayList<String>();
         ArrayList<String> frame_value=new ArrayList<String>();
