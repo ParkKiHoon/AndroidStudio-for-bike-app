@@ -17,47 +17,45 @@
         android:theme="@style/Theme.Bike2">
         <activity android:name=".SelectActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".EstimateActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".ShopInformationActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".ShopActivity"
+        <activity android:name=".EstimateActivity" />
+        <activity android:name=".ShopInformationActivity" />
+        <activity
+            android:name=".ShopActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD4VfiB0qGc17GRv_tjqfL5j3sgLe4Z1gA" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <activity android:name=".MyCustomActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".Loading"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".ai_select"/>
+        <activity android:name=".Loading_Frame_AI"/>
+        <activity android:name=".Loading_Groupset_AI"/>
+        <activity android:name=".Loading_Handlebar_AI"/>
+        <activity android:name=".Loading_Saddle_AI"/>
+        <activity android:name=".Loading_Wheelset_AI"/>
+        <activity android:name=".MyCustomActivity" />
+        <activity android:name=".Loading">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoadingBike"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-        <activity android:name=".LoadingSelf"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".LoadingBike">
         </activity>
         <activity
             android:name=".SavePopupActivity"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".InformationActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".RegisterActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".ChatActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".MainActivity"
+        <activity android:name=".InformationActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ChatActivity" />
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".ai_select"/>
     </application>
 
 </manifest>
