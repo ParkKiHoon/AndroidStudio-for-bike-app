@@ -166,6 +166,9 @@ public class InformationActivity extends AppCompatActivity {
                     UploadTask uploadTask;
                     Uri file = null;
                     file = photoUri;
+                    if(photoUri==null){
+                        file = Uri.parse("android.resource://com.example.bike2/drawable/defaultimage");
+                    }
                     uploadTask = storageRef.putFile(file);
                     uploadTask.addOnFailureListener(new OnFailureListener() {
                         @Override

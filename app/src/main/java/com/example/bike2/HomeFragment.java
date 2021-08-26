@@ -1,24 +1,44 @@
 package com.example.bike2;
 
+import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.util.Log;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,16 +49,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class HomeFragment extends Fragment {
     private View view;
-    private Button button;
-    private Button button_home;
-    private Button button_home1;
-    private Button button_home2;
+    private ScrollView scrollView;
     private ImageView iv_home_1;
     private ImageView iv_home_2;
     private ImageView iv_home_3;
@@ -50,6 +69,10 @@ public class HomeFragment extends Fragment {
     private TextView tv_home_7;
     private TextView tv_home_9;
     private TextView tv_home_11;
+    private ImageView iv1,iv2,iv3,iv4,iv5;
+    private ConstraintLayout cl1,cl2,cl3,cl4,cl5;
+
+    private ImageView transparent_view;
 
     private Animation fab_open, fab_close;
     private Boolean isFabOpen = false;
@@ -65,9 +88,6 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
-        button_home=view.findViewById(R.id.btn_home);
-        button_home1=view.findViewById(R.id.btn_home1);
-        button_home2=view.findViewById(R.id.btn_home2);
         iv_home_1=view.findViewById(R.id.iv_home_1);
         iv_home_2=view.findViewById(R.id.iv_home_2);
         iv_home_3=view.findViewById(R.id.iv_home_3);
@@ -79,6 +99,23 @@ public class HomeFragment extends Fragment {
         tv_home_7=view.findViewById(R.id.tv_home_7);
         tv_home_9=view.findViewById(R.id.tv_home_9);
         tv_home_11=view.findViewById(R.id.tv_home_11);
+        iv1=view.findViewById(R.id.home_iv1);
+        iv2=view.findViewById(R.id.home_iv2);
+        iv3=view.findViewById(R.id.home_iv3);
+        iv4=view.findViewById(R.id.home_iv4);
+        iv5=view.findViewById(R.id.home_iv5);
+        cl1=view.findViewById(R.id.cl1);
+        cl2=view.findViewById(R.id.cl2);
+        cl3=view.findViewById(R.id.cl3);
+        cl4=view.findViewById(R.id.cl4);
+        cl5=view.findViewById(R.id.cl5);
+
+        scrollView=view.findViewById(R.id.scrollView);
+
+        transparent_view=view.findViewById(R.id.tranparent_view);
+        Drawable alpha = transparent_view.getDrawable();
+        alpha.setAlpha(150);
+
 
         fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.float_open);
         fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.float_close);
@@ -90,6 +127,12 @@ public class HomeFragment extends Fragment {
         ft1=view.findViewById(R.id.floatingtext2);
         ft2=view.findViewById(R.id.floatingtext3);
         ft3=view.findViewById(R.id.floatingtext4);
+
+        setView("frame","치넬리 비고렐리 샤크",iv1);
+        setView("wheelset","스페셜라이즈드 로발 래피드CLX",iv2);
+        setView("saddle","스페셜라이즈드 안장",iv3);
+        setView("handlebar","치넬리 바이 핸들바",iv4);
+        setView("groupset","시마노 울테그라 구동계",iv5);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,86 +183,24 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
-        button_home.setOnClickListener(new View.OnClickListener() {
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
             @Override
-            public void onClick(View v) {
-                if(weight==0)
-                {
-                    Toast.makeText(getActivity(),"'견적내기'를 먼저 해주세요",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Intent intent = new Intent(getActivity(),SavePopupActivity.class);
-                startActivityForResult(intent,9090);
+            public void onScrollChanged() {
+                if(isFabOpen)
+                    anim();
             }
         });
 
-        button_home1.setOnClickListener(new View.OnClickListener() {
+        scrollView.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if(weight==0)
-                {
-                    Toast.makeText(getActivity(),"'견적내기'를 먼저 해주세요",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Map<String, Object> temp=new HashMap<>();
-                temp.put("image","아직 안넣음");
-                temp.put("time",System.currentTimeMillis());
-                temp.put("weight_price",Float.toString(weight)+"kg  -  "+Float.toString(price)+"₩");
-                temp.put("frame_name",name[0]);
-                temp.put("wheelset_name",name[1]);
-                temp.put("handlebar_name",name[2]);
-                temp.put("saddle_name",name[3]);
-                temp.put("groupset_name",name[4]);
-                temp.put("frame_value",part[0]);
-                temp.put("wheelset_value",part[1]);
-                temp.put("handlebar_value",part[2]);
-                temp.put("saddle_value",part[3]);
-                temp.put("groupset_value",part[4]);
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                DocumentReference docRef = db.collection("users").document(user.getUid());
-                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                temp.put("name",document.get("nickname").toString());
-                                db.collection("post").add(temp)
-                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                            @Override
-                                            public void onSuccess(DocumentReference documentReference) {
-                                                Log.d("TAG", "DocumentSnapshot successfully written!");
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.w("TAG", "Error writing document", e);
-                                            }
-                                        });
-                            } else {
-                            }
-                        } else {
-                        }
-                    }
-                });
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(isFabOpen)
+                    anim();
+                return false;
             }
         });
-        button_home2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(weight==0)
-                {
-                    Toast.makeText(getActivity(),"'견적내기'를 먼저 해주세요",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                ((MainActivity)getActivity()).replaceFragment(MapFragment.newInstance(),name,part);
-            }
-        });
-
         return view;
+
     }
 
 
@@ -285,7 +266,6 @@ public class HomeFragment extends Fragment {
     }
 
 
-
     public void anim() {
 
         if (isFabOpen) {
@@ -300,6 +280,18 @@ public class HomeFragment extends Fragment {
             ft3.setVisibility(View.GONE);
             isFabOpen = false;
             fab.setImageResource(R.drawable.float1);
+            Drawable tmp = fab.getBackground();
+            tmp = DrawableCompat.wrap(tmp);
+            DrawableCompat.setTint(tmp, Color.parseColor("#cecece"));
+            fab.setBackground(tmp);
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    transparent_view.setVisibility(View.INVISIBLE);
+                }
+            }, 300);
         } else {
             fab1.startAnimation(fab_open);
             fab2.startAnimation(fab_open);
@@ -312,7 +304,55 @@ public class HomeFragment extends Fragment {
             ft3.setVisibility(View.VISIBLE);
             isFabOpen = true;
             fab.setImageResource(R.drawable.float2);
+            Drawable tmp = fab.getBackground();
+            tmp = DrawableCompat.wrap(tmp);
+            DrawableCompat.setTint(tmp, Color.parseColor("#ffffff"));
+            fab.setBackground(tmp);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    transparent_view.setVisibility(View.VISIBLE);
+                }
+            }, 300);
         }
+    }
+
+    private void setView(String a,String b,ImageView c){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(a)
+                .whereEqualTo("name",b)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Glide.with(getActivity()).load(document.get("image")).listener(new RequestListener<Drawable>() {
+                                    @Override
+                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                        return false;
+                                    }
+                                    @Override
+                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                        Bitmap bitmap=((BitmapDrawable)resource).getBitmap();
+                                        c.setImageBitmap(bitmap);
+                                        int rgb = bitmap.getPixel(1,1);
+                                        switch (a){
+                                            case "frame": cl1.setBackgroundColor(rgb); break;
+                                            case "wheelset": cl2.setBackgroundColor(rgb); break;
+                                            case "saddle": cl3.setBackgroundColor(rgb); break;
+                                            case "handlebar": cl4.setBackgroundColor(rgb); break;
+                                            case "groupset": cl5.setBackgroundColor(rgb); break;
+                                        }
+                                        return true;
+                                    }
+                                }).into(c);
+                            }
+                        } else {
+                        }
+                    }
+                });
     }
 
 }

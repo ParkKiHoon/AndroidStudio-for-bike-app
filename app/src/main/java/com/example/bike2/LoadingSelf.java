@@ -72,9 +72,6 @@ public class LoadingSelf extends Activity {
         setContentView(R.layout.activity_loading_self);
         progressON(this,null);
 
-        button_home=findViewById(R.id.btn_home);
-        button_home1=findViewById(R.id.btn_home1);
-        button_home2=findViewById(R.id.btn_home2);
         iv_home_1=findViewById(R.id.iv_home_1);
         iv_home_2=findViewById(R.id.iv_home_2);
         iv_home_3=findViewById(R.id.iv_home_3);

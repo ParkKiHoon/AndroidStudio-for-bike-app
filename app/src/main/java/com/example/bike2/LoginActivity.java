@@ -126,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user.isEmailVerified()) {
                                 Toast.makeText(getApplicationContext(),"로그인 성공",Toast.LENGTH_SHORT).show();
-                                Intent intent=new Intent(LoginActivity.this, SelectActivity.class);
+                                Intent intent=new Intent(LoginActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                             }
