@@ -19,7 +19,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.unity3d.player.AiMain;
+import com.unity3d.player.Ai_Frame_Main;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -62,7 +62,7 @@ public class SelectActivity extends AppCompatActivity {
         btn_ai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),LoadingBike.class);
+                Intent intent=new Intent(getApplicationContext(),ai_select.class);
                 startActivity(intent);
             }
         });
