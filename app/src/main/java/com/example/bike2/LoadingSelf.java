@@ -36,7 +36,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.unity3d.player.Ai_Frame_Main;
 import com.unity3d.player.UnityPlayerActivity;
 
 import java.util.ArrayList;
@@ -66,6 +65,7 @@ public class LoadingSelf extends Activity {
     private ImageView transparent_view;
 
     private TextView name1,name2,name3,name4,name5,value1,value2,value3,value4,value5;
+    private TextView name6,name7,name8,name9,name10;
 
 
     private Animation fab_open, fab_close;
@@ -101,6 +101,11 @@ public class LoadingSelf extends Activity {
         name3=findViewById(R.id.name3);
         name4=findViewById(R.id.name4);
         name5=findViewById(R.id.name5);
+        name6=findViewById(R.id.name6);
+        name7=findViewById(R.id.name7);
+        name8=findViewById(R.id.name8);
+        name9=findViewById(R.id.name9);
+        name10=findViewById(R.id.name10);
         value1=findViewById(R.id.value1);
         value2=findViewById(R.id.value2);
         value3=findViewById(R.id.value3);
@@ -309,7 +314,6 @@ public class LoadingSelf extends Activity {
             }
         });
 
-        Intent intent = new Intent(getApplicationContext(), Ai_Frame_Main.class);
         final boolean[] cnt = new boolean[5];
         ArrayList<String> frame_name=new ArrayList<String>();
         ArrayList<String> frame_value=new ArrayList<String>();
@@ -458,7 +462,14 @@ public class LoadingSelf extends Activity {
             view_home7.setImageResource(R.drawable.self5);
             view_home9.setImageResource(R.drawable.self4);
             fab.setVisibility(View.VISIBLE);
-            tv_home_11.setText(Float.toString(weight)+"kg  -  "+Float.toString(price)+"₩");
+            String tmp_weight2=String.format("%.2f", weight);
+            String tmp_price2=String.format("%.0f", price);
+            tv_home_11.setText(tmp_weight2+"kg  -  "+tmp_price2+"₩");
+            name6.setVisibility(View.GONE);
+            name7.setVisibility(View.GONE);
+            name8.setVisibility(View.GONE);
+            name9.setVisibility(View.GONE);
+            name10.setVisibility(View.GONE);
 
         }
         else if(requestCode == 9090 && resultCode == 9090){

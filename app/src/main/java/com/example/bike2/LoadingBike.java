@@ -22,7 +22,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.unity3d.player.AiMain;
+import com.unity3d.player.Ai_Frame_Main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,7 +50,7 @@ public class LoadingBike extends Activity {
         loading_bike=findViewById(R.id.loading_bike);
         Glide.with(this).load(R.drawable.frame_loading).into(loading_bike);
 
-        Intent intent=new Intent(getApplicationContext(), AiMain.class);
+        Intent intent=new Intent(getApplicationContext(), Ai_Frame_Main.class);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("frame")
                 .get()

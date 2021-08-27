@@ -49,7 +49,7 @@ public class Loading_Frame_AI extends Activity {
         setContentView(R.layout.loading_bike);
 
         loading_bike=findViewById(R.id.loading_bike);
-        Glide.with(this).load(R.drawable.loading_bike).into(loading_bike);
+        Glide.with(this).load(R.drawable.loading).into(loading_bike);
 
         Intent intent=new Intent(getApplicationContext(), Ai_Frame_Main.class);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -241,8 +241,9 @@ public class Loading_Frame_AI extends Activity {
             });
 
         }
-
-        finish();
-        startActivity(new Intent(this, Loading_Frame_AI.class));
+        else if(requestCode == 1101 && resultCode == 1102) {
+            finish();
+            startActivity(new Intent(this, Loading_Frame_AI.class));
+        }
     }
 }

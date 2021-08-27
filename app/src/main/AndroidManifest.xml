@@ -15,8 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bike2">
-        <activity android:name=".SelectActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".EstimateActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".ShopInformationActivity"
@@ -58,6 +56,13 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".ai_select"/>
+        <activity android:name=".Loading_Frame_AI"/>
+        <activity android:name=".Loading_Groupset_AI"/>
+        <activity android:name=".Loading_Handlebar_AI"/>
+        <activity android:name=".Loading_Saddle_AI"/>
+        <activity android:name=".Loading_Wheelset_AI"/>
+
     </application>
 
 </manifest>

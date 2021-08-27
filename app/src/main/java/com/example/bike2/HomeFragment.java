@@ -152,12 +152,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 anim();
+                Intent intent=new Intent(getActivity(),ai_select.class);
+                startActivity(intent);
             }
         });
         ft2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 anim();
+                Intent intent=new Intent(getActivity(),ai_select.class);
+                startActivity(intent);
             }
         });
 

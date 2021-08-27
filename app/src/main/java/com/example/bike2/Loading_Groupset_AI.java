@@ -47,7 +47,7 @@ public class Loading_Groupset_AI extends Activity {
         setContentView(R.layout.loading_bike);
 
         loading_bike=findViewById(R.id.loading_bike);
-        Glide.with(this).load(R.drawable.loading_bike).into(loading_bike);
+        Glide.with(this).load(R.drawable.loading).into(loading_bike);
 
         Intent intent=new Intent(getApplicationContext(), Ai_Frame_Main.class);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -182,7 +182,7 @@ public class Loading_Groupset_AI extends Activity {
                                                                                                                 intent.putStringArrayListExtra("rating"+i, review_rating.get(i));
                                                                                                             }
                                                                                                             Log.d("happy","nice");
-                                                                                                            startActivityForResult(intent,1101);
+                                                                                                            startActivityForResult(intent,5101);
                                                                                                         }
                                                                                                     }
                                                                                                 });
@@ -202,7 +202,7 @@ public class Loading_Groupset_AI extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1101 && resultCode == 1101) {
+        if (requestCode == 5101 && resultCode == 1101) {
             String content=data.getExtras().getString("content");
             Float rating=data.getExtras().getFloat("rating");
             String id=data.getExtras().getString("id");
@@ -240,7 +240,7 @@ public class Loading_Groupset_AI extends Activity {
             });
 
         }
-        else if(requestCode == 1101 && resultCode == 1102){
+        else if(requestCode == 5101 && resultCode == 1102){
             finish();
             startActivity(new Intent(this, Loading_Groupset_AI.class));
         }
