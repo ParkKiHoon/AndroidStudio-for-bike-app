@@ -55,6 +55,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Text;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -62,12 +64,12 @@ import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
-    private View view,marker_root_view;
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+    private View view, marker_root_view;
     private MapView mapView = null;
     private GoogleMap googleMap;
     private GpsTracker gpsTracker;
-    private TextView tv_marker,tv_marker2;
+    private TextView tv_marker, tv_marker2;
     boolean isPageOpen = false;
     Animation tranlateUpAnim;
     Animation tranlateDownAnim;
@@ -76,31 +78,33 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     TextView map_content;
     ImageView map_image;
     String cur_id;
-    String[] name,part;
+    String[] name, part;
+    TextView cur_location;
 
-    public static MapFragment newInstance(){
+    public static MapFragment newInstance() {
         return new MapFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_map,container,false);
-        mapView = (MapView)view.findViewById(R.id.map);
+        view = inflater.inflate(R.layout.fragment_map, container, false);
+        mapView = (MapView) view.findViewById(R.id.map);
         mapView.getMapAsync(this);
-        tranlateUpAnim= AnimationUtils.loadAnimation(getActivity(),R.anim.translate_up);
-        tranlateDownAnim= AnimationUtils.loadAnimation(getActivity(),R.anim.translate_down);
+        tranlateUpAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.translate_up);
+        tranlateDownAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.translate_down);
         SlidingPageAnimationListener animListener = new SlidingPageAnimationListener();
         tranlateUpAnim.setAnimationListener(animListener);
         tranlateDownAnim.setAnimationListener(animListener);
         page = view.findViewById(R.id.page);
         page2 = view.findViewById(R.id.page2);
-        map_content=view.findViewById(R.id.map_content);
-        map_image=view.findViewById(R.id.map_image);
+        map_content = view.findViewById(R.id.map_content);
+        map_image = view.findViewById(R.id.map_image);
+        cur_location = view.findViewById(R.id.cur_location);
 
         try {
-            name=getArguments().getStringArray("name");
-            part=getArguments().getStringArray("part");
+            name = getArguments().getStringArray("name");
+            part = getArguments().getStringArray("part");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,10 +114,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         page2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),ShopActivity.class);
-                intent.putExtra("id",cur_id);
-                intent.putExtra("name",name);
-                intent.putExtra("part",part);
+                Intent intent = new Intent(getActivity(), ShopActivity.class);
+                intent.putExtra("id", cur_id);
+                intent.putExtra("name", name);
+                intent.putExtra("part", part);
                 startActivity(intent);
             }
         });
@@ -121,16 +125,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     }
 
 
-    private class SlidingPageAnimationListener implements Animation.AnimationListener{
-        @Override public void onAnimationStart(Animation animation) { }
-        public void onAnimationEnd(Animation animation){
-            if(isPageOpen){
+    private class SlidingPageAnimationListener implements Animation.AnimationListener {
+        @Override
+        public void onAnimationStart(Animation animation) {
+        }
+
+        public void onAnimationEnd(Animation animation) {
+            if (isPageOpen) {
                 page.setVisibility(View.INVISIBLE);
                 isPageOpen = false;
-            }else{
+            } else {
                 isPageOpen = true;
             }
-        } @Override public void onAnimationRepeat(Animation animation) {
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
 
         }
     }
@@ -181,8 +191,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if(mapView != null)
-        {
+        if (mapView != null) {
             mapView.onCreate(savedInstanceState);
         }
     }
@@ -190,28 +199,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public void onMapReady(GoogleMap googleMap) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users").whereEqualTo("isShop","true").get()
+        db.collection("users").whereEqualTo("isShop", "true").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(QueryDocumentSnapshot document : task.getResult()){
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
                                 setCustomMarkerView();
                                 tv_marker.setText(document.get("nickname").toString());
                                 tv_marker2.setText("");
                                 MarkerOptions makerOptions = new MarkerOptions();
                                 makerOptions.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getActivity(), marker_root_view)))
-                                        .alpha(0.5f)
-                                        .position(new LatLng(Double.parseDouble(document.get("latitude").toString()),Double.parseDouble(document.get("longitude").toString())))
+                                        .alpha(0.8f)
+                                        .position(new LatLng(Double.parseDouble(document.get("latitude").toString()), Double.parseDouble(document.get("longitude").toString())))
                                         .title(document.getId().toString());
 
                                 googleMap.addMarker(makerOptions).setTag(document.getId());
                             }
-                        }else {
+                        } else {
                             Log.d("tag", "Error getting documents: ", task.getException());
                         }
                     }
                 });
+
 
         googleMap.setOnMarkerClickListener(this);
 
@@ -230,8 +240,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 double latitude=gpsTracker.getLatitude();
                 double longitude =gpsTracker.getLongitude();
                 String address = getCurrentAddress(latitude, longitude);
-                LatLng latLng = new LatLng(35.2307341450881, 129.0877162342455); //latitude,longitude
-                Toast.makeText(getActivity(),"임시로 부산대로 해둠",Toast.LENGTH_SHORT).show();
+                LatLng latLng = new LatLng(latitude, longitude); //latitude,longitude
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
             }
         });
@@ -247,6 +256,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 }
             }
         });
+
+        googleMap.getUiSettings().setMyLocationButtonEnabled(false);
 
     }
 
@@ -272,7 +283,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         return bitmap;
     }
 
-    public String getCurrentAddress( double latitude, double longitude) {
+    public String getCurrentAddress( double latitude, double longitude)     {
 
         //지오코더... GPS를 주소로 변환
         Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
@@ -304,6 +315,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         }
 
         Address address = addresses.get(0);
+        String place = address.getSubLocality();
+        if (place == null) place = address.getSubAdminArea();
+        if (place == null) place = address.getAdminArea();
+        cur_location.setText(address.getAdminArea()+" "+place+" "+address.getThoroughfare());
         return address.getAddressLine(0).toString()+"\n";
 
     }

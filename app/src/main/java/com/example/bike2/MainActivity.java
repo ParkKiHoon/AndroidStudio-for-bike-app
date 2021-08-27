@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private ChatFragment chatFragment;
     private HomeFragment homeFragment;
     private DrawerLayout mDrawerLayout;
-    private Context context = this;
+    public static Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent=new Intent(MainActivity.this,LoginActivity.class);
             startActivity(intent);
         }
+        context=this;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("users").document(user.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

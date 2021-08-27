@@ -1,11 +1,8 @@
 package com.example.bike2;
 
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,20 +22,15 @@ import android.util.Log;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.request.transition.Transition;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,7 +39,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -145,7 +136,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 anim();
                 Intent intent=new Intent(getActivity(),LoadingSelf.class);
-                startActivity(intent);
+                startActivityForResult(intent,10010);
             }
         });
         ft1.setOnClickListener(new View.OnClickListener() {
@@ -263,6 +254,9 @@ public class HomeFragment extends Fragment {
                         }
                     });
         }
+        else if(requestCode == 10010 && resultCode ==10010 ){
+            ((MainActivity)getActivity()).replaceFragment(MapFragment.newInstance(),name,part);
+        }
     }
 
 
@@ -275,9 +269,7 @@ public class HomeFragment extends Fragment {
             fab1.setClickable(false);
             fab2.setClickable(false);
             fab3.setClickable(false);
-            ft1.setVisibility(View.GONE);
-            ft2.setVisibility(View.GONE);
-            ft3.setVisibility(View.GONE);
+
             isFabOpen = false;
             fab.setImageResource(R.drawable.float1);
             Drawable tmp = fab.getBackground();
@@ -289,6 +281,10 @@ public class HomeFragment extends Fragment {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+
+                    ft1.setVisibility(View.GONE);
+                    ft2.setVisibility(View.GONE);
+                    ft3.setVisibility(View.GONE);
                     transparent_view.setVisibility(View.INVISIBLE);
                 }
             }, 300);
@@ -299,9 +295,6 @@ public class HomeFragment extends Fragment {
             fab1.setClickable(true);
             fab2.setClickable(true);
             fab3.setClickable(true);
-            ft1.setVisibility(View.VISIBLE);
-            ft2.setVisibility(View.VISIBLE);
-            ft3.setVisibility(View.VISIBLE);
             isFabOpen = true;
             fab.setImageResource(R.drawable.float2);
             Drawable tmp = fab.getBackground();
@@ -312,6 +305,10 @@ public class HomeFragment extends Fragment {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+
+                    ft1.setVisibility(View.VISIBLE);
+                    ft2.setVisibility(View.VISIBLE);
+                    ft3.setVisibility(View.VISIBLE);
                     transparent_view.setVisibility(View.VISIBLE);
                 }
             }, 300);
