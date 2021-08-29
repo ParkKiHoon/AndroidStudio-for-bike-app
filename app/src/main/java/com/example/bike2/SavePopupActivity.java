@@ -26,6 +26,11 @@ public class SavePopupActivity extends Activity {
     //확인 버튼 클릭
     public void mOnClose(View v){
         //데이터 전달하기
+        if(txtText.getText().toString().getBytes().length <= 0)
+        {
+            Toast.makeText(getApplicationContext(),"제목을 입력해주세요.",Toast.LENGTH_SHORT).show();
+            return;
+        }
         Intent intent = new Intent();
         intent.putExtra("result", txtText.getText().toString());
         Toast.makeText(getApplicationContext(),txtText.getText(), Toast.LENGTH_SHORT).show();

@@ -19,11 +19,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText et_id_in_reg, et_pw_in_reg, et_pw2_in_reg;
+    private EditText et_id_in_reg, et_pw_in_reg, et_pw2_in_reg,et_birth_in_reg,et_address_in_reg;
     private ImageView btn_register_in_reg;
     private FirebaseAuth mAuth;
     private CheckBox checkBox1,checkBox2,checkBox3;
@@ -37,6 +41,8 @@ public class RegisterActivity extends AppCompatActivity {
         et_pw_in_reg = findViewById(R.id.et_pw_in_reg);
         et_pw2_in_reg = findViewById(R.id.et_pw2_in_reg);
         btn_register_in_reg = findViewById(R.id.btn_register_in_reg);
+        et_birth_in_reg=findViewById(R.id.et_birth_in_reg);
+        et_address_in_reg=findViewById(R.id.et_address_in_reg);
         checkBox1=findViewById(R.id.checkBox);
         checkBox2=findViewById(R.id.checkBox2);
         checkBox3=findViewById(R.id.checkBox3);
@@ -95,6 +101,19 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_SHORT).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
+                                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                Map<String, Object> add = new HashMap<>();
+                                if(et_address_in_reg.getText().toString().getBytes().length <= 0)
+                                    add.put("address", "미입력");
+                                else
+                                    add.put("address", et_address_in_reg.getText().toString());
+
+                                if(et_birth_in_reg.getText().toString().getBytes().length <= 0)
+                                    add.put("birth","미입력");
+                                else
+                                    add.put("birth", et_birth_in_reg.getText().toString());
+                                db.collection("additionaal").document(user.getUid())
+                                        .set(add);
                                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                 startActivity(intent);
                             } else {

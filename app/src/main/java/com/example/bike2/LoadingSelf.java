@@ -127,10 +127,10 @@ public class LoadingSelf extends Activity {
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.float_close);
 
 
-        fab = (FloatingActionButton) findViewById(R.id.floatingActionButton11);
-        fab1 = (FloatingActionButton)findViewById(R.id.floatingActionButton22);
-        fab2 = (FloatingActionButton) findViewById(R.id.floatingActionButton33);
-        fab3 = (FloatingActionButton) findViewById(R.id.floatingActionButton44);
+        fab = (FloatingActionButton) findViewById(R.id.floatingActionButton1);
+        fab1 = (FloatingActionButton)findViewById(R.id.floatingActionButton2);
+        fab2 = (FloatingActionButton) findViewById(R.id.floatingActionButton3);
+        fab3 = (FloatingActionButton) findViewById(R.id.floatingActionButton4);
         ft1=findViewById(R.id.floatingtext22);
         ft2=findViewById(R.id.floatingtext33);
         ft3=findViewById(R.id.floatingtext44);

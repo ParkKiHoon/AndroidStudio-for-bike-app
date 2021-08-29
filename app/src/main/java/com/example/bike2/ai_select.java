@@ -184,11 +184,6 @@ public class ai_select extends AppCompatActivity {
         fab3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(weight==0)
-                {
-                    Toast.makeText(getApplicationContext(),"'견적내기'를 먼저 해주세요",Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 Intent intent = new Intent(getApplicationContext(),SavePopupActivity.class);
                 startActivityForResult(intent,9090);
             }
@@ -196,11 +191,6 @@ public class ai_select extends AppCompatActivity {
         ft3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(weight==0)
-                {
-                    Toast.makeText(getApplicationContext(),"'견적내기'를 먼저 해주세요",Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 Intent intent = new Intent(getApplicationContext(),SavePopupActivity.class);
                 startActivityForResult(intent,9090);
             }
@@ -209,11 +199,6 @@ public class ai_select extends AppCompatActivity {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(weight==0)
-                {
-                    Toast.makeText(getApplicationContext(),"'견적내기'를 먼저 해주세요",Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 Map<String, Object> temp=new HashMap<>();
                 temp.put("image","아직 안넣음");
                 temp.put("time",System.currentTimeMillis());
@@ -263,11 +248,6 @@ public class ai_select extends AppCompatActivity {
         ft2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(weight==0)
-                {
-                    Toast.makeText(getApplicationContext(),"'견적내기'를 먼저 해주세요",Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 Map<String, Object> temp=new HashMap<>();
                 temp.put("image","아직 안넣음");
                 temp.put("time",System.currentTimeMillis());
@@ -318,11 +298,6 @@ public class ai_select extends AppCompatActivity {
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(weight==0)
-                {
-                    Toast.makeText(getApplicationContext(),"'견적내기'를 먼저 해주세요",Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 Intent intent = new Intent();
                 intent.putExtra("name",name);
                 intent.putExtra("part",part);
@@ -333,11 +308,6 @@ public class ai_select extends AppCompatActivity {
         ft1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(weight==0)
-                {
-                    Toast.makeText(getApplicationContext(),"'견적내기'를 먼저 해주세요",Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 Intent intent = new Intent();
                 intent.putExtra("name",name);
                 intent.putExtra("part",part);
@@ -418,24 +388,24 @@ public class ai_select extends AppCompatActivity {
             WriteReview("groupset",data);
         }
         else if(requestCode == 1101 && resultCode == 1102){
-            finish();
-            startActivity(new Intent(this, Loading_Frame_AI.class));
+            progressON(ai_select.this,null);
+            LoadingAi("frame",1101);
         }
         else if(requestCode == 2101 && resultCode == 1102){
-            finish();
-            startActivity(new Intent(this, Loading_Wheelset_AI.class));
+            progressON(ai_select.this,null);
+            LoadingAi("wheelset",2101);
         }
         else if(requestCode == 3101 && resultCode == 1102){
-            finish();
-            startActivity(new Intent(this, Loading_Handlebar_AI.class));
+            progressON(ai_select.this,null);
+            LoadingAi("handlebar",3101);
         }
         else if(requestCode == 4101 && resultCode == 1102){
-            finish();
-            startActivity(new Intent(this, Loading_Saddle_AI.class));
+            progressON(ai_select.this,null);
+            LoadingAi("saddle",4101);
         }
         else if(requestCode == 5101 && resultCode == 1102){
-            finish();
-            startActivity(new Intent(this, Loading_Groupset_AI.class));
+            progressON(ai_select.this,null);
+            LoadingAi("groupset",5101);
         }
     }
 
@@ -727,8 +697,8 @@ public class ai_select extends AppCompatActivity {
                             case "frame":
                                 name1.setText(name_tmp); value1.setText(Float.parseFloat(temp[1])+" kg\n"+Float.parseFloat(temp[2])+" 원");
                                 Glide.with(getApplicationContext()).load(image_tmp).into(iv_home_1);
-                                TotalPrice[0]+=Float.parseFloat(temp[2]);
-                                TotalWeight[0]+=Float.parseFloat(temp[1]);
+                                TotalPrice[0]=Float.parseFloat(temp[2]);
+                                TotalWeight[0]=Float.parseFloat(temp[1]);
                                 view_home1.setImageResource(R.drawable.self4);
                                 name6.setVisibility(View.GONE);
                                 TotalSet[0]=1;
@@ -736,8 +706,8 @@ public class ai_select extends AppCompatActivity {
                             case "wheelset":
                                 name2.setText(name_tmp); value2.setText(Float.parseFloat(temp[1])+" kg\n"+Float.parseFloat(temp[2])+" 원");
                                 Glide.with(getApplicationContext()).load(image_tmp).into(iv_home_2);
-                                TotalPrice[1]+=Float.parseFloat(temp[2]);
-                                TotalWeight[1]+=Float.parseFloat(temp[1]);
+                                TotalPrice[1]=Float.parseFloat(temp[2]);
+                                TotalWeight[1]=Float.parseFloat(temp[1]);
                                 view_home3.setImageResource(R.drawable.self5);
                                 name7.setVisibility(View.GONE);
                                 TotalSet[1]=1;
@@ -745,8 +715,8 @@ public class ai_select extends AppCompatActivity {
                             case "handlebar":
                                 name3.setText(name_tmp); value3.setText(Float.parseFloat(temp[1])+" kg\n"+Float.parseFloat(temp[2])+" 원");
                                 Glide.with(getApplicationContext()).load(image_tmp).into(iv_home_3);
-                                TotalPrice[2]+=Float.parseFloat(temp[2]);
-                                TotalWeight[2]+=Float.parseFloat(temp[1]);
+                                TotalPrice[2]=Float.parseFloat(temp[2]);
+                                TotalWeight[2]=Float.parseFloat(temp[1]);
                                 view_home5.setImageResource(R.drawable.self4);
                                 name8.setVisibility(View.GONE);
                                 TotalSet[2]=1;
@@ -754,8 +724,8 @@ public class ai_select extends AppCompatActivity {
                             case "saddle":
                                 name4.setText(name_tmp); value4.setText(Float.parseFloat(temp[1])+" kg\n"+Float.parseFloat(temp[2])+" 원");
                                 Glide.with(getApplicationContext()).load(image_tmp).into(iv_home_4);
-                                TotalPrice[3]+=Float.parseFloat(temp[2]);
-                                TotalWeight[3]+=Float.parseFloat(temp[1]);
+                                TotalPrice[3]=Float.parseFloat(temp[2]);
+                                TotalWeight[3]=Float.parseFloat(temp[1]);
                                 view_home7.setImageResource(R.drawable.self5);
                                 name9.setVisibility(View.GONE);
                                 TotalSet[3]=1;
@@ -763,8 +733,8 @@ public class ai_select extends AppCompatActivity {
                             case "groupset":
                                 name5.setText(name_tmp); value5.setText(Float.parseFloat(temp[1])+" kg\n"+Float.parseFloat(temp[2])+" 원");
                                 Glide.with(getApplicationContext()).load(image_tmp).into(iv_home_5);
-                                TotalPrice[4]+=Float.parseFloat(temp[2]);
-                                TotalWeight[4]+=Float.parseFloat(temp[1]);
+                                TotalPrice[4]=Float.parseFloat(temp[2]);
+                                TotalWeight[4]=Float.parseFloat(temp[1]);
                                 view_home9.setImageResource(R.drawable.self4);
                                 name10.setVisibility(View.GONE);
                                 TotalSet[4]=1;
