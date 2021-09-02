@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et_id_in_log,et_pw_in_log;
     private ImageView btn_login_in_log;
     private TextView btn_register_in_login,find_pw;
-    private CheckBox save_account;
+    private CheckBox save_account,save_account2;
     private FirebaseAuth mAuth;
     private SharedPreferences setting;
     private SharedPreferences.Editor editor;
@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_login_in_log=findViewById(R.id.btn_login_in_log);
         btn_register_in_login=findViewById(R.id.btn_register_in_log);
         save_account=findViewById(R.id.save_account);
+        save_account2=findViewById(R.id.save_account2);
         find_pw=findViewById(R.id.find_pw);
 
         setting=getSharedPreferences("setting",MODE_PRIVATE);
@@ -59,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
 
         if(save_account.isChecked()){
             et_id_in_log.setText(setting.getString("id",""));
-            et_pw_in_log.setText(setting.getString("pw",""));
         }
 
 
@@ -122,6 +122,10 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             editor.putString("id",email);
                             editor.putString("pw",password);
+                            if(save_account2.isChecked())
+                                editor.putString("auto","1");
+                            else
+                                editor.putString("auto","2");
                             editor.commit();
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user.isEmailVerified()) {

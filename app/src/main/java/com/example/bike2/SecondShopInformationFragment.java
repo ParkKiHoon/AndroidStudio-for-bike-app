@@ -20,6 +20,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -202,7 +206,9 @@ public class SecondShopInformationFragment extends Fragment {
                     Bitmap img = BitmapFactory.decodeStream(in);
                     in.close();
 
-                    info_second_image.setImageBitmap(img);
+                    RequestOptions requestOptions = new RequestOptions();
+                    requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(16));
+                    Glide.with(getActivity()).load(img).apply(requestOptions).into(info_second_image);
                 }catch(Exception e)
                 {
 

@@ -51,7 +51,13 @@ public class MyActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Glide.with(getApplicationContext()).load(document.get("profile").toString()).into(iv_my);
+                        if(document.get("profile")==null)
+                        {
+                            Glide.with(getApplicationContext()).load(document.get("image").toString()).into(iv_my);
+                        }
+                        else {
+                            Glide.with(getApplicationContext()).load(document.get("profile").toString()).into(iv_my);
+                        }
                         tv2_my.setText(document.get("nickname").toString());
                         if(document.get("isShop").toString().equals("false")){
                             tv5_my.setText("일반 이용자");

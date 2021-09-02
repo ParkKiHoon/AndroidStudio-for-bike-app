@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,9 +38,11 @@ public class ChatFragment extends Fragment {
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<ChatData> arrayList;
     private String opp_nickname;
+    private TextView no_chat;
     ListenerRegistration listner;
     FirebaseFirestore db;
     String uid ;
+    int chat_num;
 
     @Nullable
     @Override
@@ -53,6 +56,8 @@ public class ChatFragment extends Fragment {
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
         recyclerView.setAdapter(chatAdapter);
+        no_chat=view.findViewById(R.id.no_chat);
+        chat_num=0;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         uid= user.getUid();
         db = FirebaseFirestore.getInstance();
@@ -72,9 +77,17 @@ public class ChatFragment extends Fragment {
                             chatAdapter.clear();
                             if (document.getDocument().get("uid_me").equals(uid)) {
                                 get_nickname(document.getDocument().getId(),document.getDocument().get("uid_you").toString(), document.getDocument().get("latest").toString(), Long.parseLong(document.getDocument().get("time").toString()));
+                                chat_num++;
                             } else if (document.getDocument().get("uid_you").equals(uid)) {
                                 get_nickname(document.getDocument().getId(),document.getDocument().get("uid_me").toString(), document.getDocument().get("latest").toString(), Long.parseLong(document.getDocument().get("time").toString()));
+                                chat_num++;
                             }
+                        }
+                        if(chat_num==0){
+                            no_chat.setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            no_chat.setVisibility(View.INVISIBLE);
                         }
 
                     }

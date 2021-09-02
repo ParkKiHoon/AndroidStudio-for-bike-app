@@ -67,7 +67,7 @@ public class ChatActivityAdapter extends RecyclerView.Adapter<ChatActivityAdapte
                 holder.container.setVisibility(View.GONE);
                 holder.container2.setGravity(Gravity.RIGHT);
                 holder.tv_nickname2.setText(arrayList.get(position).getTv_nickname());
-                holder.tv_chat2.setText("견적요청!  "+Float.toString(weight)+"kg  "+Float.toString(price)+"₩");
+                holder.tv_chat2.setText("견적요청!\n"+String.format("%.2f", weight)+"kg  "+String.format("%.2f", price)+"₩");
                 holder.tv_time2.setText(TimeConvert.timeconvert(arrayList.get(position).getTv_time()));
                 holder.btn_chat2.setOnClickListener(new View.OnClickListener() {
                     @Override

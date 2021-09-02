@@ -39,6 +39,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -105,6 +108,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         try {
             name = getArguments().getStringArray("name");
             part = getArguments().getStringArray("part");
+            Toast.makeText(getActivity(),"견적을 요청할 가게를 선택해주세요!", Toast.LENGTH_LONG).show();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -377,8 +381,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                         else{
                             page.setVisibility(View.VISIBLE);
                             page.startAnimation(tranlateUpAnim);
-                            Glide.with(getActivity()).load(document.get("image").toString()).into(map_image);
-                            map_content.setText(document.get("nickname").toString());
+                            RequestOptions requestOptions = new RequestOptions();
+                            requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(16));
+                            Glide.with(getActivity()).load(document.get("image").toString()).apply(requestOptions).into(map_image);
+                            map_content.setText(document.get("contents").toString());
                             Handler mHandler = new Handler();
                             mHandler.postDelayed(new Runnable()  {
                                 public void run() {

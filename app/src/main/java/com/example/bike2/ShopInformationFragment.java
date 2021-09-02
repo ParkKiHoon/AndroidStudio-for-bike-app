@@ -30,6 +30,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -107,7 +111,9 @@ public class ShopInformationFragment extends Fragment implements OnMapReadyCallb
                     Bitmap img = BitmapFactory.decodeStream(in);
                     in.close();
 
-                    info_image.setImageBitmap(img);
+                    RequestOptions requestOptions = new RequestOptions();
+                    requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(16));
+                    Glide.with(getActivity()).load(img).apply(requestOptions).into(info_image);
                 }catch(Exception e)
                 {
 
@@ -189,7 +195,6 @@ public class ShopInformationFragment extends Fragment implements OnMapReadyCallb
                 latitude=gpsTracker.getLatitude();
                 longitude =gpsTracker.getLongitude();
                 String address = getCurrentAddress(latitude, longitude);
-                latitude=35.230513; longitude=129.090127; // 지우면됨!!
                 LatLng latLng = new LatLng(latitude, longitude);
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
                     setCustomMarkerView();
@@ -197,7 +202,7 @@ public class ShopInformationFragment extends Fragment implements OnMapReadyCallb
                     MarkerOptions makerOptions = new MarkerOptions();
                     makerOptions.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getActivity(), marker_root_view)))
                             .alpha(0.5f)
-                            .position(new LatLng(35.230036,129.088434)) //.position(new LatLng(latitude,longitude))
+                            .position(new LatLng(latitude,longitude))
                             .title(nickname);
 
                     googleMap.addMarker(makerOptions);
@@ -306,5 +311,11 @@ public class ShopInformationFragment extends Fragment implements OnMapReadyCallb
     public boolean onMarkerClick(@NonNull Marker marker) {
         return false;
     }
+
+
+    public interface OnBackPressedListener {
+        void onBackPressed();
+    }
+
 }
 

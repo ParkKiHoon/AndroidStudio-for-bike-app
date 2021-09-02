@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -69,6 +70,7 @@ public class HomeFragment extends Fragment {
     private Boolean isFabOpen = false;
     private FloatingActionButton fab, fab1, fab2,fab3;
     private TextView ft1,ft2,ft3;
+    private TextView look1,look2,look3,look4,look5;
 
     String[] name;
     String[] part;
@@ -100,6 +102,11 @@ public class HomeFragment extends Fragment {
         cl3=view.findViewById(R.id.cl3);
         cl4=view.findViewById(R.id.cl4);
         cl5=view.findViewById(R.id.cl5);
+        look1=view.findViewById(R.id.textView6);
+        look2=view.findViewById(R.id.textView18);
+        look3=view.findViewById(R.id.textView11);
+        look4=view.findViewById(R.id.textView25);
+        look5=view.findViewById(R.id.textView21);
 
         scrollView=view.findViewById(R.id.scrollView);
 
@@ -125,6 +132,41 @@ public class HomeFragment extends Fragment {
         setView("handlebar","치넬리 바이 핸들바",iv4);
         setView("groupset","시마노 울테그라 구동계",iv5);
 
+        look1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.cinelli-usa.com/vigorelli-shark-red-alert-frameset/"));
+                startActivity(intent);
+            }
+        });
+        look2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.specialized.com/kr/ko/roval-rapide-clx--front/p/174212?searchText=30020-6501&color=278173-174212"));
+                startActivity(intent);
+            }
+        });
+        look3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.specialized.com/us/en/power-comp/p/155836?color=229240-155836"));
+                startActivity(intent);
+            }
+        });
+        look4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.cinelli-usa.com/cinelli-vai-bicycle-handlebar/"));
+                startActivity(intent);
+            }
+        });
+        look5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://bike.shimano.com/ko-KR/product/component/ultegra-r8000.html"));
+                startActivity(intent);
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,7 +186,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 anim();
                 Intent intent=new Intent(getActivity(),LoadingSelf.class);
-                startActivity(intent);
+                startActivityForResult(intent,10010);
             }
         });
 
@@ -153,7 +195,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 anim();
                 Intent intent=new Intent(getActivity(),ai_select.class);
-                startActivity(intent);
+                startActivityForResult(intent,10010);
             }
         });
         ft2.setOnClickListener(new View.OnClickListener() {
@@ -161,7 +203,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 anim();
                 Intent intent=new Intent(getActivity(),ai_select.class);
-                startActivity(intent);
+                startActivityForResult(intent,10010);
             }
         });
 
@@ -259,6 +301,8 @@ public class HomeFragment extends Fragment {
                     });
         }
         else if(requestCode == 10010 && resultCode ==10010 ){
+            name=data.getExtras().getStringArray("name");
+            part=data.getExtras().getStringArray("part");
             ((MainActivity)getActivity()).replaceFragment(MapFragment.newInstance(),name,part);
         }
     }
@@ -269,10 +313,8 @@ public class HomeFragment extends Fragment {
         if (isFabOpen) {
             fab1.startAnimation(fab_close);
             fab2.startAnimation(fab_close);
-            fab3.startAnimation(fab_close);
             fab1.setClickable(false);
             fab2.setClickable(false);
-            fab3.setClickable(false);
 
             isFabOpen = false;
             fab.setImageResource(R.drawable.float1);
@@ -288,17 +330,14 @@ public class HomeFragment extends Fragment {
 
                     ft1.setVisibility(View.GONE);
                     ft2.setVisibility(View.GONE);
-                    ft3.setVisibility(View.GONE);
                     transparent_view.setVisibility(View.INVISIBLE);
                 }
             }, 300);
         } else {
             fab1.startAnimation(fab_open);
             fab2.startAnimation(fab_open);
-            fab3.startAnimation(fab_open);
             fab1.setClickable(true);
             fab2.setClickable(true);
-            fab3.setClickable(true);
             isFabOpen = true;
             fab.setImageResource(R.drawable.float2);
             Drawable tmp = fab.getBackground();
@@ -312,7 +351,6 @@ public class HomeFragment extends Fragment {
 
                     ft1.setVisibility(View.VISIBLE);
                     ft2.setVisibility(View.VISIBLE);
-                    ft3.setVisibility(View.VISIBLE);
                     transparent_view.setVisibility(View.VISIBLE);
                 }
             }, 300);

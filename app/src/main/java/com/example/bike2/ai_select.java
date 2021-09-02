@@ -25,6 +25,9 @@ import androidx.appcompat.app.AppCompatDialog;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -693,10 +696,12 @@ public class ai_select extends AppCompatActivity {
                         String part_tmp=document.get("value").toString();
                         String image_tmp=document.get("image").toString();
                         String[] temp=part_tmp.split("/");
+                        RequestOptions requestOptions = new RequestOptions();
+                        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(16));
                         switch (type){
                             case "frame":
                                 name1.setText(name_tmp); value1.setText(Float.parseFloat(temp[1])+" kg\n"+Float.parseFloat(temp[2])+" 원");
-                                Glide.with(getApplicationContext()).load(image_tmp).into(iv_home_1);
+                                Glide.with(getApplicationContext()).load(image_tmp).apply(requestOptions).into(iv_home_1);
                                 TotalPrice[0]=Float.parseFloat(temp[2]);
                                 TotalWeight[0]=Float.parseFloat(temp[1]);
                                 view_home1.setImageResource(R.drawable.self4);
@@ -705,7 +710,7 @@ public class ai_select extends AppCompatActivity {
                                 break;
                             case "wheelset":
                                 name2.setText(name_tmp); value2.setText(Float.parseFloat(temp[1])+" kg\n"+Float.parseFloat(temp[2])+" 원");
-                                Glide.with(getApplicationContext()).load(image_tmp).into(iv_home_2);
+                                Glide.with(getApplicationContext()).load(image_tmp).apply(requestOptions).into(iv_home_2);
                                 TotalPrice[1]=Float.parseFloat(temp[2]);
                                 TotalWeight[1]=Float.parseFloat(temp[1]);
                                 view_home3.setImageResource(R.drawable.self5);
@@ -714,7 +719,7 @@ public class ai_select extends AppCompatActivity {
                                 break;
                             case "handlebar":
                                 name3.setText(name_tmp); value3.setText(Float.parseFloat(temp[1])+" kg\n"+Float.parseFloat(temp[2])+" 원");
-                                Glide.with(getApplicationContext()).load(image_tmp).into(iv_home_3);
+                                Glide.with(getApplicationContext()).load(image_tmp).apply(requestOptions).into(iv_home_3);
                                 TotalPrice[2]=Float.parseFloat(temp[2]);
                                 TotalWeight[2]=Float.parseFloat(temp[1]);
                                 view_home5.setImageResource(R.drawable.self4);
@@ -723,7 +728,7 @@ public class ai_select extends AppCompatActivity {
                                 break;
                             case "saddle":
                                 name4.setText(name_tmp); value4.setText(Float.parseFloat(temp[1])+" kg\n"+Float.parseFloat(temp[2])+" 원");
-                                Glide.with(getApplicationContext()).load(image_tmp).into(iv_home_4);
+                                Glide.with(getApplicationContext()).load(image_tmp).apply(requestOptions).into(iv_home_4);
                                 TotalPrice[3]=Float.parseFloat(temp[2]);
                                 TotalWeight[3]=Float.parseFloat(temp[1]);
                                 view_home7.setImageResource(R.drawable.self5);
@@ -732,7 +737,7 @@ public class ai_select extends AppCompatActivity {
                                 break;
                             case "groupset":
                                 name5.setText(name_tmp); value5.setText(Float.parseFloat(temp[1])+" kg\n"+Float.parseFloat(temp[2])+" 원");
-                                Glide.with(getApplicationContext()).load(image_tmp).into(iv_home_5);
+                                Glide.with(getApplicationContext()).load(image_tmp).apply(requestOptions).into(iv_home_5);
                                 TotalPrice[4]=Float.parseFloat(temp[2]);
                                 TotalWeight[4]=Float.parseFloat(temp[1]);
                                 view_home9.setImageResource(R.drawable.self4);

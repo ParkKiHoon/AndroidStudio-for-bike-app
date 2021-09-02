@@ -7,6 +7,7 @@
     tools:context=".EstimateActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
         android:layout_height="600dp"
         android:background="@drawable/border"
@@ -30,6 +31,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="198dp"
                 android:layout_marginBottom="24dp"
+                android:fontFamily="@font/seoulhangang"
                 android:text="견적 정보"
                 android:textColor="#000000"
                 android:textSize="38sp"
@@ -45,6 +47,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="28dp"
                 android:layout_marginBottom="24dp"
+                android:fontFamily="@font/seoulhangang"
                 android:text="  시장\n가격표"
                 android:textColor="#000000"
                 android:textSize="30sp"
@@ -129,6 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="30dp"
+            android:fontFamily="@font/seoulhangang"
             android:text="프레임"
             android:textColor="#000000"
             android:textSize="25sp"
@@ -141,6 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
             android:layout_marginTop="130dp"
+            android:fontFamily="@font/seoulhangang"
             android:text="휠셋"
             android:textColor="#000000"
             android:textSize="25sp"
@@ -153,6 +158,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
             android:layout_marginTop="230dp"
+            android:fontFamily="@font/seoulhangang"
             android:text="안장"
             android:textColor="#000000"
             android:textSize="25sp"
@@ -165,6 +171,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="330dp"
+            android:fontFamily="@font/seoulhangang"
             android:text="핸들바"
             android:textColor="#000000"
             android:textSize="25sp"
@@ -177,6 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="430dp"
+            android:fontFamily="@font/seoulhangang"
             android:text="구동계"
             android:textColor="#000000"
             android:textSize="25sp"
@@ -189,7 +197,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:textSize="25sp"
+            android:fontFamily="@font/seoulhangang"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/view6"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
 
@@ -199,7 +208,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="110dp"
-            android:textSize="25sp"
+            android:fontFamily="@font/seoulhangang"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/view6"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
 
@@ -209,7 +219,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="210dp"
-            android:textSize="25sp"
+            android:fontFamily="@font/seoulhangang"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/view6"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
 
@@ -219,7 +230,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="310dp"
-            android:textSize="25sp"
+            android:fontFamily="@font/seoulhangang"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/view6"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
 
@@ -229,7 +241,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="410dp"
-            android:textSize="25sp"
+            android:fontFamily="@font/seoulhangang"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/view6"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
 
@@ -239,6 +252,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="120dp"
             android:layout_marginEnd="10dp"
+            android:fontFamily="@font/seoulhangang"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/view10"
             app:layout_constraintTop_toTopOf="@+id/constraintLayout7" />
@@ -249,6 +263,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="220dp"
             android:layout_marginEnd="10dp"
+            android:fontFamily="@font/seoulhangang"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/view10"
             app:layout_constraintTop_toTopOf="@+id/constraintLayout7" />
@@ -259,6 +274,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="320dp"
             android:layout_marginEnd="10dp"
+            android:fontFamily="@font/seoulhangang"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/view10"
             app:layout_constraintTop_toTopOf="@+id/constraintLayout7" />
@@ -269,6 +285,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="420dp"
             android:layout_marginEnd="10dp"
+            android:fontFamily="@font/seoulhangang"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/view10"
             app:layout_constraintTop_toTopOf="@+id/constraintLayout7" />
@@ -279,8 +296,26 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="520dp"
             android:layout_marginEnd="10dp"
+            android:fontFamily="@font/seoulhangang"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/view10"
             app:layout_constraintTop_toTopOf="@+id/constraintLayout7" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="47dp"
+        android:fontFamily="@font/seoulhangang"
+        android:text="기다려주세요!\n 곧 전문가의 견적서 검토가 있을 예정입니다."
+        android:textColor="#8A4242"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,19 +7,39 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tv_ai_main2"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:text="공유게시판"
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="94dp"
+        android:layout_marginEnd="95dp"
+        android:fontFamily="@font/sedansc"
+        android:text="Custom Share Board"
+        android:textColor="#7CD517"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/refresh_layout"
-        app:layout_constraintStart_toStartOf="@+id/refresh_layout" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view15"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="9dp"
+        android:background="#BDBDBD"
+        app:layout_constraintBottom_toTopOf="@+id/refresh_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView28">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"

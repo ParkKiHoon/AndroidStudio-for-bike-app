@@ -4,29 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShopActivity">
+    tools:context=".ShopActivity"
+    android:background="#F3F3F3">
 
     <ImageView
         android:id="@+id/iv_shop"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_shop2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_shop" />
 
     <TextView
         android:id="@+id/tv_shop"
         android:layout_width="wrap_content"
         android:layout_height="47dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="135dp"
+        android:fontFamily="@font/seoulhangang"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/iv_shop"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_shop" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:background="@drawable/btn_background"
+        android:fontFamily="@font/font"
+        android:textColor="#D5D5D5"
+        android:textSize="15dp"
+        android:textStyle="bold"
         android:id="@+id/bt_shop"
         android:layout_width="130dp"
         android:layout_height="52dp"
@@ -40,8 +55,10 @@
         android:id="@+id/tv_shop2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/seoulhangang"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_shop" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_shop" />
 </androidx.constraintlayout.widget.ConstraintLayout>

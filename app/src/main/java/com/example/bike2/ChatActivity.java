@@ -70,6 +70,8 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 send_message();
+                et_message.setText("");
+                recyclerView.scrollToPosition(chatActivityAdapter.getItemCount()-1);
             }
         });
         if(name!=null){
@@ -199,6 +201,7 @@ public class ChatActivity extends AppCompatActivity {
                                     chatActivityAdapter.notifyDataSetChanged();
                                     last_text=temp_text;
                                     last_time=temp_time;
+                                    recyclerView.scrollToPosition(chatActivityAdapter.getItemCount()-1);
 
 
                                 }

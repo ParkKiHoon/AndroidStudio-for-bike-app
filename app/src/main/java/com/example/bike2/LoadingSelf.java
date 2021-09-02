@@ -24,6 +24,9 @@ import androidx.appcompat.app.AppCompatDialog;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -318,18 +321,23 @@ public class LoadingSelf extends Activity {
         ArrayList<String> frame_name=new ArrayList<String>();
         ArrayList<String> frame_value=new ArrayList<String>();
         ArrayList<String> frame_image=new ArrayList<String>();
+        ArrayList<String> frame_material=new ArrayList<String>();
         ArrayList<String> wheelset_name =new ArrayList<String>();
         ArrayList<String> wheelset_value =new ArrayList<String>();
         ArrayList<String> wheelset_image =new ArrayList<String>();
+        ArrayList<String> wheelset_material=new ArrayList<String>();
         ArrayList<String> handlebar_name =new ArrayList<String>();
         ArrayList<String> handlebar_value = new ArrayList<String>();
         ArrayList<String> handlebar_image = new ArrayList<String>();
+        ArrayList<String> handlebar_material=new ArrayList<String>();
         ArrayList<String> saddle_name =new ArrayList<String>();
         ArrayList<String> saddle_value = new ArrayList<String>();
         ArrayList<String> saddle_image = new ArrayList<String>();
+        ArrayList<String> saddle_material=new ArrayList<String>();
         ArrayList<String> groupset_name = new ArrayList<String>();
         ArrayList<String> groupset_value = new ArrayList<String>();
         ArrayList<String> groupset_image = new ArrayList<String>();
+        ArrayList<String> groupset_material=new ArrayList<String>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("frame")
                 .get()
@@ -341,6 +349,7 @@ public class LoadingSelf extends Activity {
                                 frame_name.add(document.get("name").toString());
                                 frame_value.add(document.get("value").toString());
                                 frame_image.add(document.get("image").toString());
+                                frame_material.add(document.get("material").toString());
                                 //  getStock(document.get("name").toString(),1);
 
                             }
@@ -354,6 +363,7 @@ public class LoadingSelf extends Activity {
                                                     wheelset_name.add(document.get("name").toString());
                                                     wheelset_value.add(document.get("value").toString());
                                                     wheelset_image.add(document.get("image").toString());
+                                                    wheelset_material.add(document.get("material").toString());
                                                     // getStock(document.get("name").toString(),2);
                                                 }
                                                 db.collection("handlebar")
@@ -366,6 +376,7 @@ public class LoadingSelf extends Activity {
                                                                         handlebar_name.add(document.get("name").toString());
                                                                         handlebar_value.add(document.get("value").toString());
                                                                         handlebar_image.add(document.get("image").toString());
+                                                                        handlebar_material.add(document.get("material").toString());
                                                                         //getStock(document.get("name").toString(),3);
                                                                     }
                                                                     db.collection("saddle")
@@ -378,6 +389,7 @@ public class LoadingSelf extends Activity {
                                                                                             saddle_name.add(document.get("name").toString());
                                                                                             saddle_value.add(document.get("value").toString());
                                                                                             saddle_image.add(document.get("image").toString());
+                                                                                            saddle_material.add(document.get("material").toString());
                                                                                             //getStock(document.get("name").toString(),4);
                                                                                         }
                                                                                         db.collection("groupset")
@@ -390,23 +402,29 @@ public class LoadingSelf extends Activity {
                                                                                                                 groupset_name.add(document.get("name").toString());
                                                                                                                 groupset_value.add(document.get("value").toString());
                                                                                                                 groupset_image.add(document.get("image").toString());
+                                                                                                                groupset_material.add(document.get("material").toString());
                                                                                                             }
                                                                                                             Intent intent = new Intent(getApplicationContext(), UnityPlayerActivity.class);
                                                                                                             intent.putStringArrayListExtra("frame_name",frame_name);
                                                                                                             intent.putStringArrayListExtra("frame_value",frame_value);
                                                                                                             intent.putStringArrayListExtra("frame_image",frame_image);
+                                                                                                            intent.putStringArrayListExtra("frame_material",frame_material);
                                                                                                             intent.putStringArrayListExtra("wheelset_name",wheelset_name);
                                                                                                             intent.putStringArrayListExtra("wheelset_value",wheelset_value);
                                                                                                             intent.putStringArrayListExtra("wheelset_image",wheelset_image);
+                                                                                                            intent.putStringArrayListExtra("wheelset_material",wheelset_material);
                                                                                                             intent.putStringArrayListExtra("handlebar_name",handlebar_name);
                                                                                                             intent.putStringArrayListExtra("handlebar_value",handlebar_value);
                                                                                                             intent.putStringArrayListExtra("handlebar_image",handlebar_image);
+                                                                                                            intent.putStringArrayListExtra("handlebar_material",handlebar_material);
                                                                                                             intent.putStringArrayListExtra("saddle_name",saddle_name);
                                                                                                             intent.putStringArrayListExtra("saddle_value",saddle_value);
                                                                                                             intent.putStringArrayListExtra("saddle_image",saddle_image);
+                                                                                                            intent.putStringArrayListExtra("saddle_material",saddle_material);
                                                                                                             intent.putStringArrayListExtra("groupset_name",groupset_name);
                                                                                                             intent.putStringArrayListExtra("groupset_value",groupset_value);
                                                                                                             intent.putStringArrayListExtra("groupset_image",groupset_image);
+                                                                                                            intent.putStringArrayListExtra("groupset_material",groupset_material);
                                                                                                             startActivityForResult(intent,8080);
                                                                                                             progressOFF();
                                                                                                         }
@@ -434,6 +452,8 @@ public class LoadingSelf extends Activity {
             name=data.getExtras().getStringArray("name");
             part=data.getExtras().getStringArray("part");
             image=data.getExtras().getStringArray("image");
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(16));
             for(int i=0;i<5;i++){
                 String[] temp=part[i].split("/");
                 weight+=Float.parseFloat(temp[1]);
@@ -441,19 +461,19 @@ public class LoadingSelf extends Activity {
                 switch (i){
                     case 0:
                         name1.setText(name[i]); value1.setText(Float.parseFloat(temp[1])+" kg\n"+Float.parseFloat(temp[2])+" 원");
-                        Glide.with(getApplicationContext()).load(image[i]).into(iv_home_1); break;
+                        Glide.with(getApplicationContext()).load(image[i]).apply(requestOptions).into(iv_home_1); break;
                     case 1:
                         name2.setText(name[i]); value2.setText(Float.parseFloat(temp[1])+" kg\n"+Float.parseFloat(temp[2])+" 원");
-                        Glide.with(getApplicationContext()).load(image[i]).into(iv_home_2); break;
+                        Glide.with(getApplicationContext()).load(image[i]).apply(requestOptions).into(iv_home_2); break;
                     case 2:
                         name3.setText(name[i]); value3.setText(Float.parseFloat(temp[1])+" kg\n"+Float.parseFloat(temp[2])+" 원");
-                        Glide.with(getApplicationContext()).load(image[i]).into(iv_home_3); break;
+                        Glide.with(getApplicationContext()).load(image[i]).apply(requestOptions).into(iv_home_3); break;
                     case 3:
                         name4.setText(name[i]); value4.setText(Float.parseFloat(temp[1])+" kg\n"+Float.parseFloat(temp[2])+" 원");
-                        Glide.with(getApplicationContext()).load(image[i]).into(iv_home_4); break;
+                        Glide.with(getApplicationContext()).load(image[i]).apply(requestOptions).into(iv_home_4); break;
                     case 4:
                         name5.setText(name[i]); value5.setText(Float.parseFloat(temp[1])+" kg\n"+Float.parseFloat(temp[2])+" 원");
-                        Glide.with(getApplicationContext()).load(image[i]).into(iv_home_5); break;
+                        Glide.with(getApplicationContext()).load(image[i]).apply(requestOptions).into(iv_home_5); break;
                 }
             }
             view_home1.setImageResource(R.drawable.self4);

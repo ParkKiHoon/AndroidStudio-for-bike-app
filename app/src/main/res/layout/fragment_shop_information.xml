@@ -36,41 +36,45 @@
 
     <LinearLayout
         android:id="@+id/page2"
-        android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="#9EE3E3"
+        android:layout_gravity="bottom"
+        android:background="#F8F8F8"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="-40dp"
         tools:layout_editor_absoluteY="365dp">
 
         <ImageView
+            android:layout_margin="5dp
+"
             android:id="@+id/info_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:paddingTop="5dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:paddingLeft="5dp"
+            android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:src="@drawable/plus" />
 
         <EditText
-            android:textSize="22sp"
-            android:hint="지도에서 표시될 내용을 입력해 주세요"
             android:id="@+id/info_content"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/seoulhangang"
+            android:hint="이곳에 표시될 내용을 입력해 주세요"
             android:paddingTop="10dp"
-            android:paddingRight="30dp" />
+            android:paddingRight="30dp"
+            android:textSize="22sp" />
 
         <Button
             android:id="@+id/info_btn"
             android:layout_width="75dp"
             android:layout_height="50dp"
-            android:background="#EDBC00"
+            android:background="@drawable/btn_background"
+            android:fontFamily="@font/seoulhangang"
             android:text="완료"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textColor="#D5D5D5"
+            android:textSize="15dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -79,6 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#EDBC00"
+        android:fontFamily="@font/seoulhangang"
         android:gravity="center"
         android:text="가게 등록
 "

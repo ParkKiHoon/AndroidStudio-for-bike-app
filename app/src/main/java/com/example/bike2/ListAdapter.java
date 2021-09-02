@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -79,7 +80,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ListAdapter.ViewHolder holder, int position) {
         weight_price=mData.get(position).getTv_weight_price();
-        //Glide.with(holder.itemView.getContext()).load(arrayList.get(position).getIv_image()).into(holder.iv_image);
         holder.tv_name.setText(mData.get(position).getTv_name() + "님의 커스텀");
         holder.tv_time.setText(TimeConvert.timeconvert(Long.parseLong(mData.get(position).getTv_time())).toString());
         holder.tv_weight_price.setText(weight_price);

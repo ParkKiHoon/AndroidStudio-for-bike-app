@@ -46,6 +46,10 @@ public class Loading_Wheelset_AI extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading_bike);
 
+        //
+        //현재 미사용중입니다.
+        //LoadingBike Activity에서 모든것을 대체합니다.
+        //
         loading_bike=findViewById(R.id.loading_bike);
         Glide.with(this).load(R.drawable.loading).into(loading_bike);
 

@@ -13,9 +13,12 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:id="@+id/iv_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:scaleType="fitXY" />
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,25 +35,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:padding="5dp"
-                    android:text="11111"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
+
                 <TextView
+                    android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="22222222222222222"
-                    android:id="@+id/tv_time"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_chat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="111"
                 android:textColor="@color/black"
-                android:id="@+id/tv_chat"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
         </LinearLayout>
     </LinearLayout>
@@ -61,5 +62,6 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#BDBDBD"/>
+
     </LinearLayout>
 </LinearLayout>

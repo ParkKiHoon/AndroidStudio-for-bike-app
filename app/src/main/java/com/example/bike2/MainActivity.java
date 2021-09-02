@@ -120,13 +120,13 @@ public class MainActivity extends AppCompatActivity {
         headerview.findViewById(R.id.menu1_header).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getApplicationContext(),"미구현",Toast.LENGTH_SHORT).show();
             }
         });
         headerview.findViewById(R.id.menu2_header).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getApplicationContext(),"미구현",Toast.LENGTH_SHORT).show();
             }
         });
         headerview.findViewById(R.id.menu3_header).setOnClickListener(new View.OnClickListener() {
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         headerview.findViewById(R.id.menu4_header).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getApplicationContext(),"미구현",Toast.LENGTH_SHORT).show();
             }
         });
         headerview.findViewById(R.id.menu5_header).setOnClickListener(new View.OnClickListener() {
@@ -305,8 +305,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public interface OnBackPressedListener {
-    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -365,5 +363,10 @@ public class MainActivity extends AppCompatActivity {
         bundle.putStringArray("part",part);
         fragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.main_frame, fragment).commit();
+    }
+
+
+    @Override public void onBackPressed() {
+        super.onBackPressed();
     }
 }

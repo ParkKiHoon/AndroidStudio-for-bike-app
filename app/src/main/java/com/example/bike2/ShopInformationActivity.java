@@ -38,4 +38,14 @@ public class ShopInformationActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.info_frame, fragment).commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        //  super.onBackPressed();
+        Fragment test = getSupportFragmentManager().findFragmentById(R.id.info_frame);
+        if(test != null){
+            ((ShopInformationFragment.OnBackPressedListener)test).onBackPressed();
+        }else{
+            finish();
+        }
+    }
 }

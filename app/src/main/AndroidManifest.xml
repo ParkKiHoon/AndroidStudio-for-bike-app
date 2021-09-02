@@ -10,9 +10,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_cubike"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_cubike_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bike2">
         <activity android:name=".MainActivity2asv"></activity>
@@ -31,7 +31,9 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD4VfiB0qGc17GRv_tjqfL5j3sgLe4Z1gA" />
+            android:value="AIzaSyAYrD-rDJO7N2SusCsJfy9uOCzuOVeLfmw" />
+        // debug용이 아닌
+        //release용 sha-1인증서 사용중
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

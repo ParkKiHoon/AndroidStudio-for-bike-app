@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.unity3d.player.SecondUnityPlayerActivity;
+import com.unity3d.player.ThirdUnityPlayerActivity;
 
 import java.util.ArrayList;
 
@@ -68,7 +69,7 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(holder.itemView.getContext(), SecondUnityPlayerActivity.class);
+                Intent intent=new Intent(holder.itemView.getContext(), ThirdUnityPlayerActivity.class);
                 cur_name[0]=mData.get(position).getFrame_name();
                 cur_name[1]=mData.get(position).getWheelset_name();
                 cur_name[2]=mData.get(position).getHandlebar_name();
@@ -82,9 +83,9 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.ViewHo
                 intent.putExtra("cur_name",cur_name);
                 intent.putExtra("cur_part",cur_part);
                 intent.putExtra("user_id",mData.get(position).getTv_name());
-                intent.putExtra("time",TimeConvert.timeconvert(Long.parseLong(mData.get(position).getTv_time())));
+                intent.putExtra("time","0");
                 intent.putExtra("price",mData.get(position).getTv_weight_price());
-                ((Activity)holder.itemView.getContext()).startActivityForResult(intent,8090);
+                ((Activity)holder.itemView.getContext()).startActivity(intent);
 
             }
 

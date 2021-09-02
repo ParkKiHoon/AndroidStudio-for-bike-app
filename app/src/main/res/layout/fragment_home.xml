@@ -44,7 +44,7 @@
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="180dp"
-                    android:layout_height="88dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/sedansc"
                     android:text="Cinelli\nShark"
@@ -97,10 +97,10 @@
                 <TextView
                     android:id="@+id/textView16"
                     android:layout_width="180dp"
-                    android:layout_height="88dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/sedansc"
-                    android:text="Specialized\nRoval CX"
+                    android:text="Specialized\nRoval CLX"
                     android:textColor="#000000"
                     android:textSize="30sp"
                     app:layout_constraintBottom_toTopOf="@+id/textView17"
@@ -177,7 +177,7 @@
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="180dp"
-                    android:layout_height="88dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/sedansc"
                     android:text="Specialized\nSeat"
@@ -194,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="37dp"
                     android:fontFamily="@font/sedansc"
-                    android:text="0.77kg / 300,000"
+                    android:text="0.25kg / 140,000"
                     android:textColor="#000000"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toTopOf="@+id/textView11"
@@ -229,7 +229,7 @@
                 <TextView
                     android:id="@+id/textView22"
                     android:layout_width="180dp"
-                    android:layout_height="88dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/sedansc"
                     android:text="Cinelli\nVai"
@@ -309,7 +309,7 @@
                 <TextView
                     android:id="@+id/textView19"
                     android:layout_width="180dp"
-                    android:layout_height="88dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/sedansc"
                     android:text="Shimano\nUltegra"
